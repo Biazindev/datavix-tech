@@ -1,101 +1,186 @@
 import styled from 'styled-components';
-import { FaSortDown, FaWhatsapp } from 'react-icons/fa';
-import React, { useState } from 'react';
+import { FaSortDown, FaWhatsapp, FaUser, FaBars, FaTimes, FaChurch, FaHandHoldingHeart, FaChartLine, FaHeadset } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
 import { IconBaseProps } from 'react-icons';
+import { Link, useNavigate } from 'react-router-dom';
 
 const WhatsAppIcon = FaWhatsapp as unknown as React.FC<IconBaseProps>;
 const SortDown = FaSortDown as unknown as React.FC<IconBaseProps>;
+const UserIcon = FaUser as unknown as React.FC<IconBaseProps>;
+const BarsIcon = FaBars as unknown as React.FC<IconBaseProps>;
+const TimesIcon = FaTimes as unknown as React.FC<IconBaseProps>;
+const ChurchIcon = FaChurch as unknown as React.FC<IconBaseProps>;
+const HandHeartIcon = FaHandHoldingHeart as unknown as React.FC<IconBaseProps>;
+const ChartIcon = FaChartLine as unknown as React.FC<IconBaseProps>;
+const HeadsetIcon = FaHeadset as unknown as React.FC<IconBaseProps>;
 
-// Container fixo e transparente
-const HeaderContainer = styled.header`
+// ============================================
+// STYLED COMPONENTS
+// ============================================
+
+const HeaderContainer = styled.header<{ scrolled: boolean }>`
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.97);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 15px 5%;
+  background: ${({ scrolled }) => 
+    scrolled 
+      ? 'rgba(15, 23, 42, 0.95)' 
+      : 'rgba(15, 23, 42, 0.85)'
+  };
+  backdrop-filter: blur(12px);
+  padding: ${({ scrolled }) => scrolled ? '12px 5%' : '16px 5%'};
   display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 1000;
-  backdrop-filter: blur(5px);
   transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.2);
 
   @media (max-width: 768px) {
-    flex-direction: row;
-    padding: 12px 5%;
-    align-items: center;
+    padding: ${({ scrolled }) => scrolled ? '10px 5%' : '14px 5%'};
   }
 `;
 
-const Logo = styled.div`
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #009fe3;
+const Logo = styled(Link)`
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
   flex-shrink: 0;
-  background: linear-gradient(135deg, #00c3ff 0%, #009fe3 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  padding: 0 10px;
+  cursor: pointer;
+  text-decoration: none;
+
+  .logo-icon {
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #A855F7 0%, #F59E0B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .logo-text {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .logo-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #F59E0B;
+    letter-spacing: 1px;
+    margin-left: 4px;
+  }
 
   @media (max-width: 768px) {
-    font-size: 1.5rem;
+    .logo-text {
+      font-size: 1.2rem;
+    }
+    .logo-icon {
+      font-size: 1.5rem;
+    }
   }
 `;
 
 const Nav = styled.nav<{ isOpen: boolean }>`
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 24px;
+
+  @media (max-width: 992px) {
+    gap: 16px;
+  }
 
   @media (max-width: 768px) {
     position: fixed;
-    top: 70px;
+    top: 60px;
     left: 0;
     right: 0;
     flex-direction: column;
     width: 100%;
-    gap: 15px;
+    gap: 0;
     display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
-    background-color: rgba(255, 255, 255, 0.98);
-    padding: 20px 5%;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(12px);
+    padding: 20px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     z-index: 999;
-    transition: all 0.3s ease;
+    border-top: 1px solid rgba(124, 58, 237, 0.3);
+    border-bottom: 1px solid rgba(124, 58, 237, 0.3);
   }
 `;
 
-const NavItem = styled.div`
+const NavItem = styled(Link)`
   position: relative;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 5px;
-  color: #333;
+  gap: 6px;
+  color: #E2E8F0;
+  font-size: 0.95rem;
   transition: all 0.2s ease;
+  padding: 8px 0;
+  text-decoration: none;
 
-  span {
-    background-color: #00c3ff;
-    padding: 8px 16px;
-    border-radius: 24px;
-    color: #fff;
-    transition: all 0.2s ease;
+  svg {
+    font-size: 0.75rem;
+    transition: transform 0.2s ease;
   }
 
   &:hover {
-    transform: translateY(-2px);
+    color: #A855F7;
     
-    span {
-      background-color: #009fe3;
+    svg {
+      transform: rotate(180deg);
     }
   }
 
   @media (max-width: 768px) {
     width: 100%;
-    justify-content: center;
-    padding: 10px 0;
+    justify-content: space-between;
+    padding: 14px 24px;
+    border-bottom: 1px solid rgba(124, 58, 237, 0.1);
+    
+    &:hover {
+      background: rgba(124, 58, 237, 0.1);
+    }
+  }
+`;
+
+const NavItemDropdown = styled.div`
+  position: relative;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #E2E8F0;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  padding: 8px 0;
+
+  svg {
+    font-size: 0.75rem;
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    color: #A855F7;
+    
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: space-between;
+    padding: 14px 24px;
+    border-bottom: 1px solid rgba(124, 58, 237, 0.1);
+    
+    &:hover {
+      background: rgba(124, 58, 237, 0.1);
+    }
   }
 `;
 
@@ -103,35 +188,52 @@ const Dropdown = styled.div`
   position: absolute;
   top: 40px;
   left: 0;
-  background-color: white;
+  background: #1E293B;
   border-radius: 12px;
-  padding: 10px 0;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  padding: 8px 0;
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.3);
   display: none;
-  min-width: 200px;
+  min-width: 240px;
   z-index: 1000;
   overflow: hidden;
-  animation: fadeIn 0.3s ease;
+  animation: fadeInDown 0.25s ease;
+  border: 1px solid rgba(124, 58, 237, 0.3);
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  & > div {
+  & > a, & > div {
     padding: 12px 20px;
     transition: all 0.2s ease;
-    color: #555;
-    font-weight: 500;
+    color: #CBD5E1;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    text-decoration: none;
+
+    svg {
+      color: #A855F7;
+      font-size: 1rem;
+    }
   }
 
-  & > div:hover {
-    background-color: #f0f8ff;
-    color: #009fe3;
-    padding-left: 25px;
+  & > a:hover, & > div:hover {
+    background: rgba(124, 58, 237, 0.15);
+    color: #A855F7;
+    padding-left: 26px;
   }
 
-  ${NavItem}:hover & {
+  ${NavItemDropdown}:hover & {
     display: block;
   }
 
@@ -140,9 +242,11 @@ const Dropdown = styled.div`
     width: 100%;
     box-shadow: none;
     display: none;
-    margin-top: 5px;
+    background: rgba(30, 41, 59, 0.8);
+    margin-top: 8px;
+    border: none;
 
-    ${NavItem}.active & {
+    ${NavItemDropdown}.active & {
       display: block;
     }
   }
@@ -150,34 +254,64 @@ const Dropdown = styled.div`
 
 const Actions = styled.div`
   display: flex;
-  gap: 15px;
+  gap: 12px;
   align-items: center;
 
   @media (max-width: 768px) {
     flex-direction: column;
     width: 100%;
-    margin-top: 15px;
+    gap: 12px;
+    padding: 16px 24px 24px;
   }
 `;
 
-const Button = styled.button`
-  background-color: #00c3ff;
-  color: #fff;
+const ButtonPrimary = styled(Link)`
+  background: linear-gradient(135deg, #7C3AED 0%, #C026D3 100%);
+  color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 30px;
+  padding: 10px 22px;
+  border-radius: 40px;
   font-weight: 600;
+  font-size: 0.85rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 195, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+  text-decoration: none;
 
   &:hover {
-    background-color: #009fe3;
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 195, 255, 0.4);
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 22px;
+  }
+`;
+
+const ButtonSecondary = styled(Link)`
+  background: transparent;
+  color: #E2E8F0;
+  border: 1px solid rgba(124, 58, 237, 0.5);
+  padding: 10px 22px;
+  border-radius: 40px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    border-color: #A855F7;
+    color: #A855F7;
+    transform: translateY(-2px);
   }
 
   @media (max-width: 768px) {
@@ -190,21 +324,22 @@ const WhatsAppButton = styled.a`
   background-color: #25D366;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 30px;
+  padding: 10px 18px;
+  border-radius: 40px;
   font-weight: 600;
+  font-size: 0.85rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
   text-decoration: none;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2);
 
   &:hover {
     background-color: #128C7E;
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+    box-shadow: 0 6px 15px rgba(37, 211, 102, 0.3);
   }
 
   @media (max-width: 768px) {
@@ -214,18 +349,18 @@ const WhatsAppButton = styled.a`
 `;
 
 const ToggleMenu = styled.button`
-  background: none;
-  border: none;
-  font-size: 1.5rem;
+  background: rgba(124, 58, 237, 0.15);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  font-size: 1.3rem;
   cursor: pointer;
   display: none;
-  color: #009fe3;
-  padding: 5px;
-  border-radius: 5px;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: rgba(0, 159, 227, 0.1);
+    background: rgba(124, 58, 237, 0.3);
   }
 
   @media (max-width: 768px) {
@@ -233,73 +368,145 @@ const ToggleMenu = styled.button`
   }
 `;
 
-const WhatsAppLinkNav = `https://wa.me/554499991803?text=${encodeURIComponent("Olá, gostaria de saber mais informações sobre os sistemas DataVix!")}`;
+// ============================================
+// CONSTANTES
+// ============================================
 
-const Header = () => {
+const WhatsAppLink = `https://wa.me/5544991179564?text=${encodeURIComponent(
+  "Olá! Gostaria de saber mais sobre o Berion Igrejas."
+)}`;
+
+// ============================================
+// COMPONENTE PRINCIPAL
+// ============================================
+
+const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const toggleDropdown = (item: string) => {
     setActiveDropdown(activeDropdown === item ? null : item);
   };
 
+  const closeMenu = () => {
+    setMenuOpen(false);
+    setActiveDropdown(null);
+  };
+
+  const handleNavigate = (path: string) => {
+    navigate(path);
+    closeMenu();
+  };
+
   return (
-    <HeaderContainer>
-      <Logo>DataVix</Logo>
+    <HeaderContainer scrolled={scrolled}>
+      <Logo to="/" onClick={closeMenu}>
+        <span className="logo-icon">B</span>
+        <span className="logo-text">erion</span>
+        <span className="logo-badge">IGREJAS</span>
+      </Logo>
 
       <ToggleMenu onClick={() => setMenuOpen(!menuOpen)}>
-        {menuOpen ? '✕' : '☰'}
+        {menuOpen ? <TimesIcon /> : <BarsIcon />}
       </ToggleMenu>
 
       <Nav isOpen={menuOpen}>
-        <NavItem 
-          onClick={() => toggleDropdown('sistemas')}
-          className={activeDropdown === 'sistemas' ? 'active' : ''}
+        {/* Soluções Dropdown */}
+        <NavItemDropdown 
+          onClick={() => toggleDropdown('solucoes')}
+          className={activeDropdown === 'solucoes' ? 'active' : ''}
         >
-          <span>Sistemas</span>
+          <span>Soluções</span>
           <SortDown />
           <Dropdown>
-            <div>Berion Gestor</div>
-            <div>Garage360</div>
-            <div>DataVix ERP</div>
+            <div onClick={() => handleNavigate('/solucoes/igrejas-locais')}>
+              <ChurchIcon /> Para Igrejas Locais
+            </div>
+            <div onClick={() => handleNavigate('/solucoes/sedes-redes')}>
+              <HandHeartIcon /> Para Sedes e Redes
+            </div>
+            <div onClick={() => handleNavigate('/solucoes/split')}>
+              <ChartIcon /> Split de Pagamentos
+            </div>
+            <div onClick={() => handleNavigate('/solucoes/relatorios')}>
+              📊 Relatórios Automáticos
+            </div>
+            <div onClick={() => handleNavigate('/solucoes/membros')}>
+              👥 Gestão de Membros
+            </div>
           </Dropdown>
-        </NavItem>
-        
-        <NavItem 
-          onClick={() => toggleDropdown('segmentos')}
-          className={activeDropdown === 'segmentos' ? 'active' : ''}
+        </NavItemDropdown>
+
+        {/* Funcionalidades Dropdown */}
+        <NavItemDropdown 
+          onClick={() => toggleDropdown('funcionalidades')}
+          className={activeDropdown === 'funcionalidades' ? 'active' : ''}
         >
-          <span>Segmentos</span>
+          <span>Funcionalidades</span>
           <SortDown />
           <Dropdown>
-            <div>Comércio Varejista</div>
-            <div>Lojas Automotivas</div>
-            <div>Indústrias</div>
-            <div>Serviços</div>
+            <div onClick={() => handleNavigate('/funcionalidades/tesouraria')}>
+              💰 Tesouraria e Split
+            </div>
+            <div onClick={() => handleNavigate('/funcionalidades/dashboard')}>
+              📈 Dashboard Multi-Igrejas
+            </div>
+            <div onClick={() => handleNavigate('/funcionalidades/certificados')}>
+              🪪 Certificados e Carteirinhas
+            </div>
+            <div onClick={() => handleNavigate('/funcionalidades/crm')}>
+              🤖 CRM com Fluxo Guiado
+            </div>
+            <div onClick={() => handleNavigate('/funcionalidades/seguranca')}>
+              🔐 Segurança e RBAC
+            </div>
           </Dropdown>
+        </NavItemDropdown>
+
+        {/* Planos */}
+        <NavItem to="/planos" onClick={closeMenu}>
+          <span>Planos</span>
         </NavItem>
-        
-        <NavItem>
-          <span>IA</span>
-        </NavItem>
-        
-        <NavItem>
+
+        {/* Sobre */}
+        <NavItem to="/sobre" onClick={closeMenu}>
           <span>Sobre</span>
         </NavItem>
 
+        {/* Blog */}
+        <NavItem to="/blog" onClick={closeMenu}>
+          <span>Blog</span>
+        </NavItem>
+
+        {/* Ações */}
         <Actions>
+          <ButtonSecondary to="/login" onClick={closeMenu}>
+            <UserIcon size={14} />
+            Área do Cliente
+          </ButtonSecondary>
+          
+          <ButtonPrimary to="/comecar" onClick={closeMenu}>
+            Começar Agora
+          </ButtonPrimary>
+
           <WhatsAppButton 
-            href={WhatsAppLinkNav} 
+            href={WhatsAppLink} 
             target="_blank" 
             rel="noopener noreferrer"
           >
-            <WhatsAppIcon size={18} />
-            LIGAMOS PARA VOCÊ
+            <WhatsAppIcon size={16} />
+            WhatsApp
           </WhatsAppButton>
-          
-          <Button>
-            SOU CLIENTE <SortDown />
-          </Button>
         </Actions>
       </Nav>
     </HeaderContainer>

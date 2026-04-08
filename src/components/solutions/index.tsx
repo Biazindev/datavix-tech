@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import {
-  FaTractor,
-  FaHardHat,
-  FaGraduationCap,
-  FaMoneyCheckAlt,
-  FaConciergeBell,
-  FaBalanceScale,
-  FaShippingFast,
-  FaIndustry,
-  FaTools,
-  FaHeartbeat,
-  FaShoppingCart,
-  FaTruckMoving,
+  FaChurch,
+  FaHandHoldingHeart,
+  FaChartLine,
+  FaFileAlt,
+  FaUsers,
+  FaUserCheck,
+  FaMoneyBillWave,
+  FaCreditCard,
+  FaRobot,
+  FaShieldAlt,
+  FaGlobe,
+  FaHeadset,
 } from 'react-icons/fa';
 
 // Tipagem
@@ -22,16 +22,20 @@ type IconComponent = React.ComponentType<{
   className?: string;
 }>;
 
-interface SolucaoItem {
+interface FuncionalidadeItem {
   titulo: string;
+  descricao: string;
   icone: IconComponent;
   cor?: string;
 }
 
-// Estilização Moderna
+// ============================================
+// STYLED COMPONENTS
+// ============================================
+
 const Secao = styled.section`
-  padding: 4rem 1.5rem;
-  background: linear-gradient(to bottom, #f7f8fa 0%, #ffffff 100%);
+  padding: 5rem 1.5rem;
+  background: linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%);
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -39,58 +43,94 @@ const Secao = styled.section`
   &::before {
     content: '';
     position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.3), transparent);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(0, 195, 255, 0.3) 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.2), transparent);
   }
 `;
 
 const Container = styled.div`
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 `;
 
-const Titulo = styled.h2`
-  font-size: clamp(1.75rem, 5vw, 2.5rem);
-  font-weight: 800;
-  color: #102a43;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, #00c3ff 0%, #009fe3 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+const Badge = styled.span`
   display: inline-block;
+  background: rgba(124, 58, 237, 0.1);
+  padding: 0.5rem 1.2rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #7C3AED;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(124, 58, 237, 0.2);
+`;
+
+const Titulo = styled.h2`
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 1rem;
+  
+  span {
+    background: linear-gradient(135deg, #7C3AED 0%, #C026D3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 `;
 
 const Subtitulo = styled.p`
   font-size: clamp(0.95rem, 3vw, 1.1rem);
   max-width: 700px;
   margin: 0 auto 3rem;
-  color: #486581;
+  color: #475569;
   line-height: 1.6;
 `;
 
 const Grade = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
   padding: 0 1rem;
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  @media (min-width: 1400px) {
+    grid-template-columns: repeat(4, 1fr);
   }
 `;
 
 const Cartao = styled.div<{ cor?: string }>`
-  background: #ffffff;
-  border-radius: 1rem;
-  padding: 1.75rem 1.25rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  background: #FFFFFF;
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
   position: relative;
   overflow: hidden;
@@ -103,126 +143,184 @@ const Cartao = styled.div<{ cor?: string }>`
     left: 0;
     right: 0;
     height: 4px;
-    background: ${({ cor }) => cor || '#7c5dfa'};
+    background: linear-gradient(90deg, #7C3AED 0%, #C026D3 100%);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
   }
 
   &:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 35px -10px rgba(124, 58, 237, 0.15);
+    border-color: rgba(124, 58, 237, 0.1);
+
+    &::before {
+      transform: scaleX(1);
+    }
   }
 `;
 
 const WrapperIcone = styled.div<{ cor?: string }>`
-  font-size: 2.5rem;
-  color: ${({ cor }) => cor || '#7c5dfa'};
-  margin-bottom: 1.25rem;
+  font-size: 2.2rem;
+  color: #7C3AED;
+  margin-bottom: 1.5rem;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 70px;
   height: 70px;
-  border-radius: 50%;
-  background-color: rgba(124, 93, 250, 0.1);
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(192, 38, 211, 0.05) 100%);
 
   ${Cartao}:hover & {
-    transform: scale(1.1);
-    background-color: rgba(124, 93, 250, 0.15);
+    transform: scale(1.05);
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(192, 38, 211, 0.1) 100%);
   }
 `;
 
 const TituloCartao = styled.h3`
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  color: #102a43;
-  margin-bottom: 1rem;
-  text-align: center;
-  position: relative;
-  padding-bottom: 0.5rem;
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
-    height: 2px;
-    background: rgba(0, 195, 255, 0.5);
-  }
+  color: #0F172A;
+  margin-bottom: 0.75rem;
 `;
 
-const Botao = styled.button<{ cor?: string }>`
-  background: linear-gradient(135deg, ${({ cor }) => cor || '#7c5dfa'} 0%, ${({ cor }) => cor ? '#5a3bdc' : '#5a3bdc'} 100%);
-  border: none;
-  border-radius: 1.5rem;
-  color: white;
-  padding: 0.6rem 1.5rem;
+const DescricaoCartao = styled.p`
+  font-size: 0.9rem;
+  color: #64748B;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+`;
+
+const LinkSaibaMais = styled.a`
+  background: transparent;
+  color: #7C3AED;
   font-weight: 600;
   font-size: 0.85rem;
-  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   transition: all 0.3s ease;
+  cursor: pointer;
   margin-top: auto;
-  box-shadow: 0 4px 12px rgba(124, 93, 250, 0.25);
-  position: relative;
-  overflow: hidden;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: 0.5s;
+  svg {
+    transition: transform 0.3s ease;
   }
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(124, 93, 250, 0.35);
+    color: #C026D3;
+    gap: 10px;
 
-    &::before {
-      left: 100%;
+    svg {
+      transform: translateX(4px);
     }
   }
 `;
 
-// Dados com cores personalizadas
-const dadosSolucoes: SolucaoItem[] = [
-  { titulo: 'Agro', icone: FaTractor as any, cor: '#4CAF50' },
-  { titulo: 'Construção', icone: FaHardHat as any, cor: '#FF9800' },
-  { titulo: 'Educacional', icone: FaGraduationCap as any, cor: '#2196F3' },
-  { titulo: 'Serviços Financeiros', icone: FaMoneyCheckAlt as any, cor: '#9C27B0' },
-  { titulo: 'Hotelaria', icone: FaConciergeBell as any, cor: '#E91E63' },
-  { titulo: 'Jurídico', icone: FaBalanceScale as any, cor: '#607D8B' },
-  { titulo: 'Logística', icone: FaShippingFast as any, cor: '#3F51B5' },
-  { titulo: 'Manufatura', icone: FaIndustry as any, cor: '#795548' },
-  { titulo: 'Prestadores de Serviços', icone: FaTools as any, cor: '#009688' },
-  { titulo: 'Saúde', icone: FaHeartbeat as any, cor: '#F44336' },
-  { titulo: 'Varejo', icone: FaShoppingCart as any, cor: '#FF5722' },
-  { titulo: 'Distribuição', icone: FaTruckMoving as any, cor: '#673AB7' },
+// Ícone de seta para o link
+const ArrowIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+// ============================================
+// DADOS DAS FUNCIONALIDADES
+// ============================================
+
+const dadosFuncionalidades: FuncionalidadeItem[] = [
+  {
+    titulo: "Gestão de Membros",
+    descricao: "Cadastro completo, aniversariantes, certificados, carteirinhas e histórico de membros.",
+    icone: FaUsers as any,
+  },
+  {
+    titulo: "Dízimos e Ofertas",
+    descricao: "Registro de contribuições com suporte a múltiplos pagamentos e recibos digitais.",
+    icone: FaHandHoldingHeart as any,
+  },
+  {
+    titulo: "Split Automático",
+    descricao: "Divisão automática de valores entre sede, regional, fundos e pastor.",
+    icone: FaMoneyBillWave as any,
+  },
+  {
+    titulo: "Relatórios Financeiros",
+    descricao: "Dashboards completos com entradas, saídas, saldo e análises por período.",
+    icone: FaChartLine as any,
+  },
+  {
+    titulo: "Relatório Patrimonial",
+    descricao: "Inventário completo com 33 itens de bens da igreja (imóveis, veículos, equipamentos).",
+    icone: FaFileAlt as any,
+  },
+  {
+    titulo: "Envio Automático",
+    descricao: "Relatórios enviados automaticamente para a sede após dupla aprovação.",
+    icone: FaGlobe as any,
+  },
+  {
+    titulo: "CRM Inteligente",
+    descricao: "Fluxo guiado que direciona dúvidas para suporte técnico ou sede.",
+    icone: FaRobot as any,
+  },
+  {
+    titulo: "Gestão de Usuários",
+    descricao: "RBAC granular com perfis: Pastor, Tesoureiro, Secretaria, Admin.",
+    icone: FaUserCheck as any,
+  },
+  {
+    titulo: "PIX e Boleto",
+    descricao: "Integração com gateway de pagamentos para repasses e contribuições.",
+    icone: FaCreditCard as any,
+  },
+  {
+    titulo: "Segurança Total",
+    descricao: "Dados protegidos com criptografia, JWT e isolamento multitenant.",
+    icone: FaShieldAlt as any,
+  },
+  {
+    titulo: "Dashboard Multi-Igrejas",
+    descricao: "Visão consolidada para sedes acompanharem todas as igrejas em tempo real.",
+    icone: FaChurch as any,
+  },
+  {
+    titulo: "Suporte Dedicado",
+    descricao: "Atendimento especializado para igrejas e sedes com fluxo guiado.",
+    icone: FaHeadset as any,
+  },
 ];
 
+// ============================================
+// COMPONENTE PRINCIPAL
+// ============================================
 
-const Solucoes: React.FC = () => {
+const Funcionalidades: React.FC = () => {
   return (
-    <Secao id="solucoes">
+    <Secao id="funcionalidades">
       <Container>
-        <Titulo>Entendemos o seu segmento</Titulo>
+        <Badge>⚡ Funcionalidades Poderosas</Badge>
+        <Titulo>
+          Tudo que sua igreja precisa em <span>um só lugar</span>
+        </Titulo>
         <Subtitulo>
-          Nossos especialistas desenvolvem soluções personalizadas que evoluem junto
-          com sua empresa, utilizando tecnologia de ponta para cada mercado específico.
+          Gerencie membros, finanças, relatórios e muito mais com a plataforma mais completa 
+          para igrejas e sedes mundiais.
         </Subtitulo>
 
         <Grade>
-          {dadosSolucoes.map(({ titulo, icone: Icone, cor }) => (
-            <Cartao key={titulo} cor={cor}>
-              <WrapperIcone cor={cor}>
-                <Icone size="1.5em" />
+          {dadosFuncionalidades.map(({ titulo, descricao, icone: Icone }) => (
+            <Cartao key={titulo}>
+              <WrapperIcone>
+                <Icone size="1.6rem" />
               </WrapperIcone>
               <TituloCartao>{titulo}</TituloCartao>
-              <Botao cor={cor}>Saiba Mais</Botao>
+              <DescricaoCartao>{descricao}</DescricaoCartao>
+              <LinkSaibaMais href="#">
+                Saiba mais <ArrowIcon />
+              </LinkSaibaMais>
             </Cartao>
           ))}
         </Grade>
@@ -231,4 +329,4 @@ const Solucoes: React.FC = () => {
   );
 };
 
-export default Solucoes;
+export default Funcionalidades;

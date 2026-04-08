@@ -1,347 +1,381 @@
 import React, { useRef, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectFade, Pagination, Navigation, Parallax } from 'swiper/modules';
+import { Autoplay, EffectFade, Pagination, Navigation } from 'swiper/modules';
 import styled, { keyframes } from 'styled-components';
-import 'swiper/css';
-import 'swiper/css/effect-fade';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import 'swiper/css/parallax';
 
-// substitua pelas imagens do Berion ERP
-import erpDashboard from '../../assets/dash.jpeg';
-import erpReports from '../../assets/contas receber.jpeg';
-import erpTeam from '../../assets/contasPagar.jpeg';
-import erpAutomation from '../../assets/home.jpeg';
 
-const floatAnimation = keyframes`
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0px); }
+// Imagens do Berion Igrejas (substitua pelas suas)
+import igrejaDashboard from '../../assets/dash.jpeg';
+import relatorioFinanceiro from '../../assets/contas receber.jpeg';
+import splitPagamento from '../../assets/contasPagar.jpeg';
+import gestaoMembros from '../../assets/home.jpeg';
+
+// ============================================
+// ANIMAÇÕES
+// ============================================
+const fadeInUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 `;
-const appearUp = keyframes`
-  from { transform: translateY(12px); opacity: 0; }
-  to   { transform: translateY(0);  opacity: 1; }
+
+const pulse = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(124, 58, 237, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(124, 58, 237, 0);
+  }
 `;
 
-const HeroSection = styled.section`
+// ============================================
+// STYLED COMPONENTS
+// ============================================
+
+const HeroSectionWrapper = styled.section`
   width: 100%;
-  height: 85vh;
-  min-height: 500px;
-  max-height: 800px;
   position: relative;
+  background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 100%);
   overflow: hidden;
-  background: #000;
+`;
 
-  .swiper {
-    width: 100%;
-    height: 100%;
-  }
-
-  .swiper-slide {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-
-  .slide-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.7);
-    transform: scale(1.1);
-    transition: transform 10s ease-out;
-  }
-
-  .swiper-slide-active .slide-image {
-    transform: scale(1);
-  }
-
-  .slide-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 1200px;
-    text-align: center;
-    z-index: 10;
-    padding: 0 20px;
-  }
-
-  .slide-text {
-    color: #fff;
-    font-size: clamp(2.2rem, 5vw, 4rem);
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 1rem;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
-    
-    span {
-      color: #00c3ff;
-    }
-  }
-
-  .slide-subtext {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: clamp(1rem, 2vw, 1.5rem);
-    font-weight: 400;
-    max-width: 650px;
-    margin: 0 auto 2rem;
-    line-height: 1.5;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out 0.2s;
-  }
-
-  .slide-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 2.5rem;
-    background: linear-gradient(135deg, #00c3ff 0%, #009fe3 100%);
-    color: white;
-    font-weight: 600;
-    font-size: clamp(0.9rem, 1.3vw, 1.1rem);
-    border-radius: 50px;
-    text-decoration: none;
-    box-shadow: 0 8px 25px rgba(0, 195, 255, 0.4);
-    transition: all 0.5s ease-out 0.4s;
-    opacity: 0;
-    transform: translateY(30px);
-    cursor: pointer;
-    border: none;
-
-    &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(0, 195, 255, 0.6);
-    }
-  }
-
-  .swiper-slide-active {
-    .slide-text,
-    .slide-subtext,
-    .slide-button {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .swiper-pagination {
-    bottom: 20px !important;
-    
-    &-bullet {
-      width: 10px;
-      height: 10px;
-      background: rgba(255, 255, 255, 0.5);
-      opacity: 1;
-      transition: all 0.3s ease;
-      margin: 0 6px !important;
-
-      &-active {
-        background: #00c3ff;
-        transform: scale(1.3);
-      }
-    }
-  }
-
-  .swiper-button-next,
-  .swiper-button-prev {
-    color: #00c3ff;
-    width: 45px;
-    height: 45px;
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    opacity: 0.7;
-
-    &:hover {
-      background: rgba(0, 195, 255, 0.2);
-      opacity: 1;
-    }
-
-    &::after {
-      font-size: 1.4rem;
-    }
-  }
-`
-export const HeroContent = styled.div`
-  width: 100%;
-  max-width: 1200px;
+const HeroContainer = styled.div`
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 4rem 2rem;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  padding: 6rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
 
   @media (max-width: 992px) {
-    padding: 3rem 1.5rem;
-  }
-
-  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    padding: 4rem 1.5rem;
+    gap: 3rem;
     text-align: center;
-    padding: 2rem 1rem;
   }
 `;
 
-export const HeroLabel = styled.span`
+const HeroContent = styled.div`
+  animation: ${fadeInUp} 0.8s ease-out;
+`;
+
+const HeroBadge = styled.span`
   display: inline-block;
-  font-size: 0.85rem;
-  font-weight: 700;
+  background: rgba(124, 58, 237, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #00c3ff;
-  margin-bottom: 0.75rem;
+  letter-spacing: 1.5px;
+  color: #A855F7;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(124, 58, 237, 0.3);
 `;
 
-export const HeroTitle = styled.h1`
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
+const HeroTitle = styled.h1`
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 800;
-  color: #1a1a1a;
-  margin-bottom: 1rem;
   line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: #FFFFFF;
 
-  strong {
-    color: #00c3ff;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 2.2rem;
+  span {
+    background: linear-gradient(135deg, #A855F7 0%, #F59E0B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 `;
 
-export const HeroSubtitle = styled.p`
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  color: rgba(0, 0, 0, 0.7);
-  max-width: 650px;
+const HeroDescription = styled.p`
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.7);
   line-height: 1.6;
   margin-bottom: 2rem;
-
-  @media (max-width: 768px) {
-    margin: 0 auto 1.5rem;
-  }
-`;
-
-export const HeroRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
+  max-width: 500px;
 
   @media (max-width: 992px) {
-    flex-direction: column;
-    text-align: center;
-
-    > div {
-      width: 100% !important;
-      max-width: 100% !important;
-    }
+    max-width: 100%;
   }
 `;
-;
 
-const Berion = () => {
-    const swiperRef = useRef<any>(null);
+const ButtonGroup = styled.div`
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (swiperRef.current && swiperRef.current.swiper) {
-                const scrollY = window.scrollY;
-                const slideHeight = swiperRef.current.swiper.height;
-                const currentSlide = swiperRef.current.swiper.activeIndex;
-                const parallaxValue = scrollY * 0.3;
-                swiperRef.current.swiper.slides[currentSlide]
-                    .querySelector('.slide-image').style.transform =
-                    `scale(${1 + parallaxValue * 0.0005})`;
-            }
-        };
+  @media (max-width: 992px) {
+    justify-content: center;
+  }
+`;
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+const ButtonPrimary = styled.button`
+  background: linear-gradient(135deg, #7C3AED 0%, #C026D3 100%);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
 
-    return (
-        <>
-            <HeroContent>
-                <HeroLabel>Berion</HeroLabel>
-                <HeroTitle>Berion <strong style={{ fontWeight: 900 }}>Gestor</strong></HeroTitle>
-                <HeroSubtitle>
-                    Plataforma para gerir vendas, estoque e PDV com automações e integração fiscal — pensada sua empresa.
-                </HeroSubtitle>
-            </HeroContent>
-            <HeroSection>
-                <Swiper
-                    ref={swiperRef}
-                    modules={[Autoplay, EffectFade, Pagination, Navigation, Parallax]}
-                    spaceBetween={0}
-                    slidesPerView={1}
-                    effect="fade"
-                    speed={1200}
-                    autoplay={{ delay: 7000, disableOnInteraction: false }}
-                    loop
-                    pagination={{ clickable: true }}
-                    navigation={{
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    }}
-                    parallax
-                >
-                    <SwiperSlide>
-                        <img src={erpDashboard} alt="ERP Dashboard" className="slide-image" />
-                        <div className="slide-content">
-                            <h2 className="slide-text">Gestão completa em um só <span>sistema</span></h2>
-                            <p className="slide-subtext">
-                                Controle financeiro, estoque, vendas e relatórios em tempo real, tudo integrado.
-                            </p>
-                            <button className="slide-button">Explorar Funcionalidades</button>
-                        </div>
-                    </SwiperSlide>
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+  }
+`;
 
-                    <SwiperSlide>
-                        <img src={erpReports} alt="ERP Reports" className="slide-image" />
-                        <div className="slide-content">
-                            <h2 className="slide-text">Decisões baseadas em <span>dados</span></h2>
-                            <p className="slide-subtext">
-                                Relatórios inteligentes e dashboards personalizados para análise precisa.
-                            </p>
-                            <button className="slide-button">Ver Demonstração</button>
-                        </div>
-                    </SwiperSlide>
+const ButtonSecondary = styled.button`
+  background: transparent;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
 
-                    <SwiperSlide>
-                        <img src={erpTeam} alt="ERP Team" className="slide-image" />
-                        <div className="slide-content">
-                            <h2 className="slide-text">Colaboração que <span>impulsiona</span></h2>
-                            <p className="slide-subtext">
-                                Conecte setores, facilite processos e aumente a produtividade da sua equipe.
-                            </p>
-                            <button className="slide-button">Agendar Reunião</button>
-                        </div>
-                    </SwiperSlide>
+  &:hover {
+    border-color: #A855F7;
+    background: rgba(124, 58, 237, 0.1);
+  }
+`;
 
-                    <SwiperSlide>
-                        <img src={erpAutomation} alt="ERP Automation" className="slide-image" />
-                        <div className="slide-content">
-                            <h2 className="slide-text">Automação que <span>transforma</span></h2>
-                            <p className="slide-subtext">
-                                Reduza tarefas manuais com fluxos automatizados e aumente eficiência.
-                            </p>
-                            <button className="slide-button">Solicitar Proposta</button>
-                        </div>
-                    </SwiperSlide>
+const StatsContainer = styled.div`
+  display: flex;
+  gap: 2rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
 
-                    <div className="swiper-button-next"></div>
-                    <div className="swiper-button-prev"></div>
-                </Swiper>
-            </HeroSection>
+  @media (max-width: 992px) {
+    justify-content: center;
+  }
+`;
 
-        </>
-    );
+const StatItem = styled.div`
+  text-align: left;
+
+  @media (max-width: 992px) {
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #F59E0B;
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+`;
+
+const HeroImageWrapper = styled.div`
+  position: relative;
+  animation: ${fadeInUp} 0.8s ease-out 0.2s both;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(245, 158, 11, 0.1));
+    border-radius: 30px;
+    filter: blur(40px);
+    z-index: 0;
+  }
+`;
+
+const DashboardMockup = styled.div`
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+`;
+
+// ============================================
+// COMPONENTE DE FUNCIONALIDADES
+// ============================================
+
+const FeaturesSection = styled.section`
+  padding: 5rem 2rem;
+  background: #F8FAFC;
+`;
+
+const FeaturesContainer = styled.div`
+  max-width: 1400px;
+  margin: 0 auto;
+`;
+
+const SectionHeader = styled.div`
+  text-align: center;
+  margin-bottom: 4rem;
+
+  h2 {
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    color: #0F172A;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: #64748B;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+`;
+
+const FeaturesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+`;
+
+const FeatureCard = styled.div`
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  border: 1px solid #E2E8F0;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    border-color: #A855F7;
+  }
+
+  .icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #7C3AED20, #C026D320);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    color: #64748B;
+    line-height: 1.5;
+  }
+`;
+
+// ============================================
+// COMPONENTE PRINCIPAL
+// ============================================
+
+const BerionIgrejas: React.FC = () => {
+  const features = [
+    { icon: "👥", title: "Gestão de Membros", description: "Cadastro completo, aniversariantes, certificados e carteirinhas em um só lugar." },
+    { icon: "💰", title: "Split Automático", description: "Divisão inteligente de dízimos e ofertas entre sede, regional e fundos." },
+    { icon: "📊", title: "Relatórios Automáticos", description: "Fluxo guiado com dupla aprovação e envio automático para sede." },
+    { icon: "🎯", title: "CRM Inteligente", description: "Suporte com fluxo guiado que direciona automaticamente as demandas." },
+    { icon: "🔐", title: "Segurança Total", description: "RBAC granular, JWT e isolamento multitenant para cada igreja." },
+    { icon: "💳", title: "PIX e Boleto", description: "Repasses integrados com gateway de pagamentos e split configurável." },
+  ];
+
+  return (
+    <>
+      {/* HERO SECTION */}
+      <HeroSectionWrapper>
+        <HeroContainer>
+          <HeroContent>
+            <HeroBadge>✨ Plataforma Eclesiástica Completa</HeroBadge>
+            <HeroTitle>
+              Gerencie sua igreja com <span>tecnologia de ponta</span>
+            </HeroTitle>
+            <HeroDescription>
+              Berion Igrejas é a plataforma que integra gestão de membros, finanças com split automático e relatórios inteligentes. Perfeito para igrejas locais e sedes mundiais.
+            </HeroDescription>
+            <ButtonGroup>
+              <ButtonPrimary>🎯 Começar Agora</ButtonPrimary>
+              <ButtonSecondary>📹 Ver Demonstração</ButtonSecondary>
+            </ButtonGroup>
+            <StatsContainer>
+              <StatItem>
+                <h3>500+</h3>
+                <p>IGREJAS</p>
+              </StatItem>
+              <StatItem>
+                <h3>R$ 2M+</h3>
+                <p>EM REPASSES</p>
+              </StatItem>
+              <StatItem>
+                <h3>24/7</h3>
+                <p>SUPORTE</p>
+              </StatItem>
+            </StatsContainer>
+          </HeroContent>
+
+          <HeroImageWrapper>
+            <DashboardMockup>
+              <img src={igrejaDashboard} alt="Berion Igrejas Dashboard" />
+            </DashboardMockup>
+          </HeroImageWrapper>
+        </HeroContainer>
+      </HeroSectionWrapper>
+
+      {/* FEATURES SECTION */}
+      <FeaturesSection>
+        <FeaturesContainer>
+          <SectionHeader>
+            <h2>Tudo que sua igreja precisa em <span style={{ color: '#7C3AED' }}>um só lugar</span></h2>
+            <p>Funcionalidades poderosas para gestão completa da sua igreja</p>
+          </SectionHeader>
+          <FeaturesGrid>
+            {features.map((feature, index) => (
+              <FeatureCard key={index}>
+                <div className="icon">{feature.icon}</div>
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+              </FeatureCard>
+            ))}
+          </FeaturesGrid>
+        </FeaturesContainer>
+      </FeaturesSection>
+    </>
+  );
 };
 
-export default Berion;
+export default BerionIgrejas;
