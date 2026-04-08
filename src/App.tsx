@@ -23,6 +23,10 @@ import RelatoriosAutomaticos from './components/RelatoriosAutomaticos';
 import GestaoMembros from './components/GestaoMembros';
 import TesourariaSplit from './components/TesourariaSplit';
 import GlobalStyles from './styles';
+import DashboardMulti from './components/DashMult';
+import Certificados from './components/certificados';
+import CRMFluxoGuiado from './components/CRM';
+import SegurancaRBAC from './components/seguranca';
 
 // Página Home que agrupa todos os componentes
 const HomePage: React.FC = () => {
@@ -63,10 +67,10 @@ function App() {
         
         {/* Rotas de Funcionalidades */}
         <Route path="/funcionalidades/tesouraria" element={<TesourariaSplit />} />
-        {/* <Route path="/funcionalidades/dashboard" element={<DashboardMulti />} />
+        <Route path="/funcionalidades/dashboard" element={<DashboardMulti />} />
         <Route path="/funcionalidades/certificados" element={<Certificados />} />
-        <Route path="/funcionalidades/crm" element={<CRMFluxoGuiado />} />
-        <Route path="/funcionalidades/seguranca" element={<SegurancaRBAC />} /> */}
+         <Route path="/funcionalidades/crm" element={<CRMFluxoGuiado />} />
+        <Route path="/funcionalidades/seguranca" element={<SegurancaRBAC />} /> 
         
         {/* Rota 404 - Página não encontrada */}
         <Route path="*" element={<NotFound />} />

@@ -13,6 +13,7 @@ const ChurchIcon = FaChurch as unknown as React.FC<IconBaseProps>;
 const HandHeartIcon = FaHandHoldingHeart as unknown as React.FC<IconBaseProps>;
 const ChartIcon = FaChartLine as unknown as React.FC<IconBaseProps>;
 const HeadsetIcon = FaHeadset as unknown as React.FC<IconBaseProps>;
+import { LuChurch } from "react-icons/lu";
 
 // ============================================
 // STYLED COMPONENTS
@@ -430,7 +431,7 @@ const Header: React.FC = () => {
           <SortDown />
           <Dropdown>
             <div onClick={() => handleNavigate('/solucoes/igrejas-locais')}>
-              <ChurchIcon /> Para Igrejas Locais
+              <LuChurch /> Para Igrejas Locais
             </div>
             <div onClick={() => handleNavigate('/solucoes/sedes-redes')}>
               <HandHeartIcon /> Para Sedes e Redes
