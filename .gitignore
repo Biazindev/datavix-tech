@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 .vercel
+
+# superpowers subagent-driven-development scratch workspace
+.superpowers/
