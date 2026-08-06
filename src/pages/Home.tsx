@@ -15,7 +15,7 @@ export function Home() {
           Desenvolvemos plataformas completas para quem precisa de gestão financeira, de membros e
           de vendas com transparência e automação.
         </p>
-        <div className="mt-8 flex justify-center gap-4">
+        <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Button asChild size="lg">
             <Link to="/produtos">Conhecer os produtos</Link>
           </Button>
