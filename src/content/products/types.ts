@@ -1,4 +1,4 @@
-import type { ProductSlug } from '../theme'
+import type { AccentColor, ProductSlug } from '../theme'
 
 export interface ProductFeature {
   title: string
@@ -15,7 +15,7 @@ export interface ProductContent {
   name: string
   tagline: string
   description: string
-  accentColor: string
+  accentColor: AccentColor
   features: ProductFeature[]
   stats?: ProductStat[]
   ctaLabel: string

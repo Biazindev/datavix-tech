@@ -4,7 +4,10 @@ export type ProductSlug =
   | 'conexao-jovem'
   | 'berion-comercios'
 
-export const productAccent: Record<ProductSlug, string> = {
+export const accentColors = ['violet', 'sky', 'amber', 'emerald'] as const
+export type AccentColor = (typeof accentColors)[number]
+
+export const productAccent: Record<ProductSlug, AccentColor> = {
   'berion-igrejas': 'violet',
   'app-membros': 'sky',
   'conexao-jovem': 'amber',
