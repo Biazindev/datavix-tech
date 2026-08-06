@@ -89,5 +89,5 @@ ERP para comércio e prestação de serviços: PDV/vendas, comandas, delivery, c
 
 ## Decisões confirmadas
 
-- **Contato**: `/contato` e todos os CTAs usam link direto para WhatsApp (sem formulário com backend). Números já existentes no footer atual: (44) 99117-9564 e (17) 98135-2391 — confirmar com o usuário qual usar como principal na fase de plano.
+- **Contato**: `/contato` e todos os CTAs usam link direto para WhatsApp (sem formulário com backend), usando o número principal (44) 99117-9564. O segundo número do footer atual, (17) 98135-2391, pode continuar listado como contato secundário no rodapé, sem ser o alvo dos CTAs.
 - **Cores por produto**: confirmado — cada produto mantém uma cor de destaque própria (accent color) sobre a base institucional neutra. As cores exatas são definidas na fase de execução com apoio dos skills `frontend-design` e `ui-ux-pro-max`.
