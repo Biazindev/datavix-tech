@@ -13,6 +13,7 @@ export interface ProductStat {
 export interface ProductContent {
   slug: ProductSlug
   name: string
+  tag: string
   tagline: string
   description: string
   accentColor: AccentColor

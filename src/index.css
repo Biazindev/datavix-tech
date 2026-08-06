@@ -10,8 +10,8 @@
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 243 75% 59%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 37 55% 42%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
@@ -22,7 +22,7 @@
     --destructive-foreground: 0 0% 98%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 243 75% 59%;
+    --ring: 37 55% 42%;
     --radius: 0.5rem;
   }
 
@@ -54,6 +54,21 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .stamp {
+    @apply inline-flex -rotate-3 items-center gap-2 rounded-sm border border-dashed px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.15em];
+  }
+
+  .ledger-figure {
+    @apply font-mono tabular-nums;
   }
 }

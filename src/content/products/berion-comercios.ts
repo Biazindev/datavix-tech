@@ -4,6 +4,7 @@ import type { ProductContent } from './types'
 export const berionComercios: ProductContent = {
   slug: 'berion-comercios',
   name: 'Berion Comércios',
+  tag: 'ERP comércio & serviços',
   tagline: 'ERP completo para comércio e serviços',
   description:
     'Gestão de vendas, estoque, financeiro e múltiplas filiais em uma plataforma só, para comércios e prestadores de serviço.',

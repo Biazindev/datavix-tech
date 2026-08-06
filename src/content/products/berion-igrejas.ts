@@ -4,6 +4,7 @@ import type { ProductContent } from './types'
 export const berionIgrejas: ProductContent = {
   slug: 'berion-igrejas',
   name: 'Berion Igrejas',
+  tag: 'Gestão eclesiástica',
   tagline: 'Gestão completa para sua igreja',
   description:
     'Plataforma eclesiástica completa: controle de membros, dízimos, ofertas e votos em um só lugar, com split automático de repasses e relatórios inteligentes.',

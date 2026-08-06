@@ -6,9 +6,13 @@ export default {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   safelist: accentColors.flatMap((color) => [
     `bg-${color}-50`,
+    `bg-${color}-100`,
     `bg-${color}-600`,
     `bg-${color}-700`,
     `text-${color}-600`,
+    `text-${color}-700`,
+    `border-${color}-300`,
+    `border-${color}-600`,
   ]),
   theme: {
     container: {
@@ -53,6 +57,21 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        ink: {
+          DEFAULT: "#12162B",
+          light: "#1D2340",
+        },
+        paper: "#FAF8F3",
+        brass: {
+          DEFAULT: "#B98A3E",
+          light: "#D6AD6B",
+          dark: "#8F6A2E",
+        },
+      },
+      fontFamily: {
+        sans: ['"Inter"', "system-ui", "sans-serif"],
+        display: ['"Space Grotesk"', '"Inter"', "system-ui", "sans-serif"],
+        mono: ['"IBM Plex Mono"', '"ui-monospace"', "monospace"],
       },
       borderRadius: {
         lg: "var(--radius)",

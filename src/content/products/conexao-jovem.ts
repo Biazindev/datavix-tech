@@ -4,6 +4,7 @@ import type { ProductContent } from './types'
 export const conexaoJovem: ProductContent = {
   slug: 'conexao-jovem',
   name: 'Conexão Jovem',
+  tag: 'Comunidade jovem',
   tagline: 'Comunidade para o departamento de jovens',
   description:
     'App de comunidade feito para o departamento de jovens: devocional diário, eventos e feed, com assinatura acessível a partir de R$ 4,99.',

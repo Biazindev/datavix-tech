@@ -17,7 +17,10 @@ export function Header() {
   return (
     <header className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-50">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        <Link to="/" className="text-lg font-bold tracking-tight">
+        <Link to="/" className="flex items-center gap-2 text-lg font-semibold tracking-tight">
+          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-ink font-display text-sm font-bold text-brass-light">
+            D
+          </span>
           DataVix Tech
         </Link>
         <nav className="hidden md:flex items-center gap-6">

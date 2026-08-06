@@ -4,6 +4,7 @@ import type { ProductContent } from './types'
 export const appMembros: ProductContent = {
   slug: 'app-membros',
   name: 'App Membros Berion',
+  tag: 'App do membro',
   tagline: 'Sua igreja no bolso, todos os dias',
   description:
     'App para o membro acompanhar a vida da igreja: feed da comunidade, agenda, Bíblia, departamentos, lives e ofertas, direto do celular.',
