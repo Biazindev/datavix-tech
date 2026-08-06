@@ -21,7 +21,7 @@ export function Contato() {
         <div className="mt-12 space-y-1 text-sm text-muted-foreground">
           <p>(44) 99117-9564</p>
           <p>(17) 98135-2391</p>
-          <p>help@biazinsistemas.com</p>
+          <p>contato@datavixtech.com</p>
           <p>Av. Napoleão Moreira da Silva, 430 — Centro, Terra Boa - PR, CEP 87240-000</p>
         </div>
       </div>

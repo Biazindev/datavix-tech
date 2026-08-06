@@ -63,7 +63,7 @@ export function Footer() {
               </a>
             </li>
             <li>(17) 98135-2391</li>
-            <li>help@biazinsistemas.com</li>
+            <li>contato@datavixtech.com</li>
           </ul>
         </div>
       </div>
