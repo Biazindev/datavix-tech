@@ -1,8 +1,15 @@
 import type { Config } from "tailwindcss"
 
+const accentColors = ["violet", "sky", "amber", "emerald"]
+
 export default {
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
+  safelist: accentColors.flatMap((color) => [
+    `bg-${color}-50`,
+    `bg-${color}-600`,
+    `text-${color}-600`,
+  ]),
   theme: {
     container: {
       center: true,
