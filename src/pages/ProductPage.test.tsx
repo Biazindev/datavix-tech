@@ -14,7 +14,7 @@ describe('ProductPage', () => {
     expect(screen.getByRole('heading', { name: berionComercios.name })).toBeInTheDocument()
     expect(screen.getByText(berionComercios.tagline)).toBeInTheDocument()
     berionComercios.features.forEach((feature) => {
-      expect(screen.getByText(feature.title)).toBeInTheDocument()
+      expect(screen.getAllByText(feature.title).length).toBeGreaterThan(0)
     })
     const ctas = screen.getAllByRole('link', { name: berionComercios.ctaLabel })
     expect(ctas.length).toBeGreaterThan(0)

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Menu, X } from 'lucide-react'
+import { ChevronDown, Menu, X } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,10 +15,10 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
-    <header className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-50">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-ink text-paper">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        <Link to="/" className="flex items-center gap-2 text-lg font-semibold tracking-tight">
-          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-ink font-display text-sm font-bold text-brass-light">
+        <Link to="/" className="flex items-center gap-2 font-display text-lg font-semibold tracking-tight">
+          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-brass text-sm font-bold text-ink">
             D
           </span>
           DataVix Tech
@@ -26,7 +26,10 @@ export function Header() {
         <nav className="hidden md:flex items-center gap-6">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost">Produtos</Button>
+              <Button variant="ghost" className="gap-1 text-paper hover:bg-white/10 hover:text-paper">
+                Produtos
+                <ChevronDown className="h-3.5 w-3.5" />
+              </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
               {products.map((product) => (
@@ -36,13 +39,13 @@ export function Header() {
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Link to="/sobre" className="text-sm font-medium text-muted-foreground hover:text-foreground">
+          <Link to="/sobre" className="text-sm font-medium text-paper/60 hover:text-paper">
             Sobre
           </Link>
-          <Link to="/blog" className="text-sm font-medium text-muted-foreground hover:text-foreground">
+          <Link to="/blog" className="text-sm font-medium text-paper/60 hover:text-paper">
             Blog
           </Link>
-          <Link to="/contato" className="text-sm font-medium text-muted-foreground hover:text-foreground">
+          <Link to="/contato" className="text-sm font-medium text-paper/60 hover:text-paper">
             Contato
           </Link>
         </nav>
@@ -58,7 +61,7 @@ export function Header() {
         <Button
           variant="ghost"
           size="icon"
-          className="md:hidden"
+          className="text-paper hover:bg-white/10 hover:text-paper md:hidden"
           aria-label={mobileOpen ? 'Fechar menu' : 'Abrir menu'}
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((open) => !open)}
@@ -67,14 +70,14 @@ export function Header() {
         </Button>
       </div>
       {mobileOpen && (
-        <nav className="md:hidden border-t border-border px-4 py-4 flex flex-col gap-4">
-          <span className="text-sm font-semibold text-muted-foreground">Produtos</span>
+        <nav className="md:hidden border-t border-white/10 px-4 py-4 flex flex-col gap-4">
+          <span className="text-sm font-semibold text-paper/40">Produtos</span>
           <div className="flex flex-col gap-3 pl-2">
             {products.map((product) => (
               <Link
                 key={product.slug}
                 to={`/${product.slug}`}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground"
+                className="text-sm font-medium text-paper/70 hover:text-paper"
                 onClick={() => setMobileOpen(false)}
               >
                 {product.name}
@@ -83,21 +86,21 @@ export function Header() {
           </div>
           <Link
             to="/sobre"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground"
+            className="text-sm font-medium text-paper/70 hover:text-paper"
             onClick={() => setMobileOpen(false)}
           >
             Sobre
           </Link>
           <Link
             to="/blog"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground"
+            className="text-sm font-medium text-paper/70 hover:text-paper"
             onClick={() => setMobileOpen(false)}
           >
             Blog
           </Link>
           <Link
             to="/contato"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground"
+            className="text-sm font-medium text-paper/70 hover:text-paper"
             onClick={() => setMobileOpen(false)}
           >
             Contato

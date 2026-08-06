@@ -1,19 +1,13 @@
 import type { Config } from "tailwindcss"
-import { accentColors } from "./src/content/theme"
+
+// Accent colors are applied via inline styles driven by `accentHex` in
+// src/content/theme.ts, not dynamic Tailwind class names — so no safelist
+// is needed for them (dynamic `bg-${color}-500`-style classes would be
+// purged in production without one; inline styles sidestep that entirely).
 
 export default {
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
-  safelist: accentColors.flatMap((color) => [
-    `bg-${color}-50`,
-    `bg-${color}-100`,
-    `bg-${color}-600`,
-    `bg-${color}-700`,
-    `text-${color}-600`,
-    `text-${color}-700`,
-    `border-${color}-300`,
-    `border-${color}-600`,
-  ]),
   theme: {
     container: {
       center: true,
@@ -30,7 +24,7 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "hsl(var(--primary) / <alpha-value>)",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {

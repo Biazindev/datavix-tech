@@ -64,11 +64,24 @@
 }
 
 @layer components {
-  .stamp {
-    @apply inline-flex -rotate-3 items-center gap-2 rounded-sm border border-dashed px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.15em];
+  .pill-badge {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide;
   }
 
   .ledger-figure {
     @apply font-mono tabular-nums;
+  }
+
+  .ink-glow {
+    background-image:
+      radial-gradient(ellipse 55% 45% at 15% 15%, rgba(185, 138, 62, 0.12), transparent 65%),
+      radial-gradient(ellipse 45% 40% at 90% 60%, rgba(255, 255, 255, 0.05), transparent 70%);
+  }
+
+  .ink-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
   }
 }
