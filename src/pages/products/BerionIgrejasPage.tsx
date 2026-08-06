@@ -29,7 +29,7 @@ const cta = whatsappLink(`Olá! Quero saber mais sobre o ${berionIgrejas.name}.`
 export function BerionIgrejasPage() {
   return (
     <div>
-      <section className="ink-glow ink-grid bg-ink px-4 py-20 text-paper">
+      <section className="ink-glow bg-ink px-4 py-20 text-paper">
         <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <div>
             <span className="pill-badge" style={{ borderColor: `${hex[400]}66`, color: hex[400] }}>

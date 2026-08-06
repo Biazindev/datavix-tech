@@ -14,7 +14,7 @@ const HOME_STATS = [
 export function Home() {
   return (
     <div>
-      <section className="ink-glow ink-grid bg-ink px-4 py-24 text-center text-paper">
+      <section className="ink-glow bg-ink px-4 py-24 text-center text-paper">
         <span className="pill-badge border-brass/40 text-brass-light">DataVix Tech</span>
         <h1 className="mx-auto mt-6 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">
           Tecnologia que organiza a gestão de <span className="text-brass-light">igrejas</span> e{' '}

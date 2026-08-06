@@ -77,11 +77,4 @@
       radial-gradient(ellipse 55% 45% at 15% 15%, rgba(185, 138, 62, 0.12), transparent 65%),
       radial-gradient(ellipse 45% 40% at 90% 60%, rgba(255, 255, 255, 0.05), transparent 70%);
   }
-
-  .ink-grid {
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
 }
