@@ -1,15 +1,29 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
-import { BrowserRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 import App from './App'
 
-describe('App', () => {
-  it('renders without crashing', () => {
-    render(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    )
-    expect(document.body).toBeTruthy()
+function renderAt(path: string) {
+  return render(
+    <MemoryRouter initialEntries={[path]}>
+      <App />
+    </MemoryRouter>
+  )
+}
+
+describe('App routing', () => {
+  it('renders Home at /', () => {
+    renderAt('/')
+    expect(screen.getByRole('heading', { name: /datavix tech/i })).toBeInTheDocument()
+  })
+
+  it('renders each product page at its route', () => {
+    renderAt('/berion-igrejas')
+    expect(screen.getByRole('heading', { name: 'Berion Igrejas' })).toBeInTheDocument()
+  })
+
+  it('renders NotFound for an unknown route', () => {
+    renderAt('/rota-que-nao-existe')
+    expect(screen.getByText('404')).toBeInTheDocument()
   })
 })
