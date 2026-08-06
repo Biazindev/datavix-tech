@@ -12,10 +12,10 @@ describe('Header', () => {
       </MemoryRouter>
     )
     await userEvent.click(screen.getByRole('button', { name: /produtos/i }))
-    expect(await screen.findByRole('link', { name: /berion igrejas/i })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /app membros berion/i })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /conexão jovem/i })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /berion comércios/i })).toBeInTheDocument()
+    expect(await screen.findByRole('menuitem', { name: /berion igrejas/i })).toBeInTheDocument()
+    expect(screen.getByRole('menuitem', { name: /app membros berion/i })).toBeInTheDocument()
+    expect(screen.getByRole('menuitem', { name: /conexão jovem/i })).toBeInTheDocument()
+    expect(screen.getByRole('menuitem', { name: /berion comércios/i })).toBeInTheDocument()
   })
 
   it('has a CTA linking to WhatsApp', () => {

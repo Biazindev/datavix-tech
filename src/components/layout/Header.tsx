@@ -24,9 +24,7 @@ export function Header() {
             <DropdownMenuContent align="start">
               {products.map((product) => (
                 <DropdownMenuItem key={product.slug} asChild>
-                  <Link to={`/${product.slug}`} role="link">
-                    {product.name}
-                  </Link>
+                  <Link to={`/${product.slug}`}>{product.name}</Link>
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>
