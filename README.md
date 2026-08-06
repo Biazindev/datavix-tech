@@ -1,46 +1,39 @@
-# Getting Started with Create React App
+# DataVix Tech
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Site institucional da DataVix Tech, construído com Vite, React, TypeScript, Tailwind CSS e shadcn/ui.
 
-## Available Scripts
+## Stack
 
-In the project directory, you can run:
+- [Vite](https://vitejs.dev/) — build tool e dev server
+- [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/)
+- [React Router](https://reactrouter.com/) para roteamento
+- [Vitest](https://vitest.dev/) + [Testing Library](https://testing-library.com/) para testes
 
-### `npm start`
+## Scripts disponíveis
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+No diretório do projeto, você pode rodar:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### `npm run dev`
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Inicia o servidor de desenvolvimento do Vite.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Faz a checagem de tipos (`tsc -b`) e gera o build de produção na pasta `dist/`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `npm run preview`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Serve localmente o build de produção gerado em `dist/` para conferência antes do deploy.
 
-### `npm run eject`
+### `npm test`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Executa a suíte de testes uma única vez com o Vitest.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `npm run test:watch`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Executa a suíte de testes em modo watch.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Deploy
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+O projeto é publicado na [Vercel](https://vercel.com/). O arquivo `vercel.json` garante o fallback de rotas para uma SPA, redirecionando qualquer caminho para `index.html`.
