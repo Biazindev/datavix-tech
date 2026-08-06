@@ -87,7 +87,7 @@ ERP para comércio e prestação de serviços: PDV/vendas, comandas, delivery, c
 - Rodar o site localmente (`npm run dev`) e navegar pelas 4 páginas de produto, home, produtos, sobre e contato conferindo: nav funcional, CTAs levando a `/contato`, responsividade mobile/desktop, ausência de erros no console.
 - Sem testes automatizados novos previstos neste escopo (site de marketing, sem lógica de negócio).
 
-## Abertos para a fase de plano
+## Decisões confirmadas
 
-- Se o formulário de contato deve ser um `mailto:`/link de WhatsApp direto ou um formulário estático sem backend.
-- Cores de destaque exatas por produto e detalhes tipográficos (decididos com os skills de design durante a implementação).
+- **Contato**: `/contato` e todos os CTAs usam link direto para WhatsApp (sem formulário com backend). Números já existentes no footer atual: (44) 99117-9564 e (17) 98135-2391 — confirmar com o usuário qual usar como principal na fase de plano.
+- **Cores por produto**: confirmado — cada produto mantém uma cor de destaque própria (accent color) sobre a base institucional neutra. As cores exatas são definidas na fase de execução com apoio dos skills `frontend-design` e `ui-ux-pro-max`.
