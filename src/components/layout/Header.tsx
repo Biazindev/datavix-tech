@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Menu, X } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,13 +12,15 @@ import { products } from '@/content/products'
 import { whatsappLink } from '@/lib/whatsapp'
 
 export function Header() {
+  const [mobileOpen, setMobileOpen] = useState(false)
+
   return (
     <header className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-50">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
         <Link to="/" className="text-lg font-bold tracking-tight">
           DataVix Tech
         </Link>
-        <nav className="flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-6">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost">Produtos</Button>
@@ -39,12 +43,68 @@ export function Header() {
             Contato
           </Link>
         </nav>
-        <Button asChild>
+        <Button asChild className="hidden md:inline-flex">
           <a href={whatsappLink('Olá! Quero saber mais sobre os produtos da DataVix Tech.')}>
             Falar com o time
           </a>
         </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="md:hidden"
+          aria-label={mobileOpen ? 'Fechar menu' : 'Abrir menu'}
+          aria-expanded={mobileOpen}
+          onClick={() => setMobileOpen((open) => !open)}
+        >
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </Button>
       </div>
+      {mobileOpen && (
+        <nav className="md:hidden border-t border-border px-4 py-4 flex flex-col gap-4">
+          <span className="text-sm font-semibold text-muted-foreground">Produtos</span>
+          <div className="flex flex-col gap-3 pl-2">
+            {products.map((product) => (
+              <Link
+                key={product.slug}
+                to={`/${product.slug}`}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground"
+                onClick={() => setMobileOpen(false)}
+              >
+                {product.name}
+              </Link>
+            ))}
+          </div>
+          <Link
+            to="/sobre"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground"
+            onClick={() => setMobileOpen(false)}
+          >
+            Sobre
+          </Link>
+          <Link
+            to="/blog"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground"
+            onClick={() => setMobileOpen(false)}
+          >
+            Blog
+          </Link>
+          <Link
+            to="/contato"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground"
+            onClick={() => setMobileOpen(false)}
+          >
+            Contato
+          </Link>
+          <Button asChild className="w-full">
+            <a
+              href={whatsappLink('Olá! Quero saber mais sobre os produtos da DataVix Tech.')}
+              onClick={() => setMobileOpen(false)}
+            >
+              Falar com o time
+            </a>
+          </Button>
+        </nav>
+      )}
     </header>
   )
 }

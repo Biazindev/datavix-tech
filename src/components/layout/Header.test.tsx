@@ -27,4 +27,21 @@ describe('Header', () => {
     const cta = screen.getByRole('link', { name: /falar com o time/i })
     expect(cta).toHaveAttribute('href', expect.stringContaining('wa.me/5544991179564'))
   })
+
+  it('reveals nav links in a mobile menu when the toggle button is clicked', async () => {
+    render(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>
+    )
+    // Before opening, only the always-present desktop nav renders "Sobre".
+    expect(screen.getAllByRole('link', { name: /^sobre$/i })).toHaveLength(1)
+
+    await userEvent.click(screen.getByRole('button', { name: /abrir menu/i }))
+
+    // After opening, the mobile menu adds a second copy of each link.
+    expect(screen.getAllByRole('link', { name: /^sobre$/i })).toHaveLength(2)
+    expect(screen.getAllByRole('link', { name: /^blog$/i })).toHaveLength(2)
+    expect(screen.getAllByRole('link', { name: /^contato$/i })).toHaveLength(2)
+  })
 })
