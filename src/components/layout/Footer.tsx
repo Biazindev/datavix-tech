@@ -40,7 +40,13 @@ export function Footer() {
           <p className="text-sm font-semibold">Contato</p>
           <ul className="mt-2 space-y-2 text-sm text-muted-foreground">
             <li>
-              <a href={whatsappLink('Olá! Quero saber mais sobre a DataVix Tech.')}>(44) 99117-9564</a>
+              <a
+                href={whatsappLink('Olá! Quero saber mais sobre a DataVix Tech.')}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                (44) 99117-9564
+              </a>
             </li>
             <li>(17) 98135-2391</li>
             <li>help@biazinsistemas.com</li>

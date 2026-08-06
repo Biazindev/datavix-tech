@@ -14,7 +14,7 @@ function renderAt(path: string) {
 describe('App routing', () => {
   it('renders Home at /', () => {
     renderAt('/')
-    expect(screen.getByRole('heading', { name: /datavix tech/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /tecnologia que organiza/i })).toBeInTheDocument()
   })
 
   it('renders each product page at its route', () => {

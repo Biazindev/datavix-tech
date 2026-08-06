@@ -44,7 +44,11 @@ export function Header() {
           </Link>
         </nav>
         <Button asChild className="hidden md:inline-flex">
-          <a href={whatsappLink('Olá! Quero saber mais sobre os produtos da DataVix Tech.')}>
+          <a
+            href={whatsappLink('Olá! Quero saber mais sobre os produtos da DataVix Tech.')}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Falar com o time
           </a>
         </Button>
@@ -98,6 +102,8 @@ export function Header() {
           <Button asChild className="w-full">
             <a
               href={whatsappLink('Olá! Quero saber mais sobre os produtos da DataVix Tech.')}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}
             >
               Falar com o time

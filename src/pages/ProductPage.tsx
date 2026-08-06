@@ -13,7 +13,9 @@ export function ProductPage({ product }: { product: ProductContent }) {
           <p className={`mt-2 text-xl font-medium text-${product.accentColor}-600`}>{product.tagline}</p>
           <p className="mx-auto mt-6 max-w-2xl text-muted-foreground">{product.description}</p>
           <Button asChild size="lg" className="mt-8">
-            <a href={cta}>{product.ctaLabel}</a>
+            <a href={cta} target="_blank" rel="noopener noreferrer">
+            {product.ctaLabel}
+          </a>
           </Button>
         </div>
       </section>
@@ -45,10 +47,12 @@ export function ProductPage({ product }: { product: ProductContent }) {
         </div>
       </section>
 
-      <section className={`bg-${product.accentColor}-600 px-4 py-16 text-center text-white`}>
+      <section className={`bg-${product.accentColor}-700 px-4 py-16 text-center text-white`}>
         <h2 className="text-2xl font-bold">Pronto para conhecer o {product.name}?</h2>
         <Button asChild size="lg" variant="secondary" className="mt-6">
-          <a href={cta}>{product.ctaLabel}</a>
+          <a href={cta} target="_blank" rel="noopener noreferrer">
+            {product.ctaLabel}
+          </a>
         </Button>
       </section>
     </div>

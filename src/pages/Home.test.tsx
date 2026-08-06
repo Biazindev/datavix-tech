@@ -11,7 +11,7 @@ describe('Home', () => {
         <Home />
       </MemoryRouter>
     )
-    expect(screen.getByRole('heading', { name: /datavix tech/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /tecnologia que organiza/i })).toBeInTheDocument()
     products.forEach((product) => {
       expect(screen.getByRole('link', { name: new RegExp(product.name, 'i') })).toHaveAttribute(
         'href',

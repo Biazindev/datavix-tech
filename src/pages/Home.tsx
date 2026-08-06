@@ -7,7 +7,7 @@ export function Home() {
   return (
     <div>
       <section className="px-4 py-24 text-center">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-primary">DataVix Tech</h2>
+        <p className="text-sm font-semibold uppercase tracking-wide text-primary">DataVix Tech</p>
         <h1 className="mx-auto mt-2 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">
           Tecnologia que organiza a gestão de igrejas e comércios
         </h1>
@@ -20,7 +20,13 @@ export function Home() {
             <Link to="/produtos">Conhecer os produtos</Link>
           </Button>
           <Button asChild size="lg" variant="outline">
-            <a href={whatsappLink('Olá! Quero saber mais sobre a DataVix Tech.')}>Falar com o time</a>
+            <a
+              href={whatsappLink('Olá! Quero saber mais sobre a DataVix Tech.')}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Falar com o time
+            </a>
           </Button>
         </div>
       </section>

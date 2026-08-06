@@ -10,7 +10,11 @@ export function Contato() {
           A forma mais rápida de falar com o time da DataVix Tech é pelo WhatsApp.
         </p>
         <Button asChild size="lg" className="mt-8">
-          <a href={whatsappLink('Olá! Quero falar com o time da DataVix Tech.')}>
+          <a
+            href={whatsappLink('Olá! Quero falar com o time da DataVix Tech.')}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Chamar no WhatsApp
           </a>
         </Button>
