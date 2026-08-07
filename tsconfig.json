@@ -22,7 +22,6 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "ignoreDeprecations": "6.0",
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
