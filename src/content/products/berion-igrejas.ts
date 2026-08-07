@@ -1,4 +1,4 @@
-import { productAccent } from '../theme'
+﻿import { productAccent } from '../theme'
 import type { ProductContent } from './types'
 
 export const berionIgrejas: ProductContent = {
@@ -11,9 +11,9 @@ export const berionIgrejas: ProductContent = {
   accentColor: productAccent['berion-igrejas'],
   ctaLabel: 'Começar agora',
   stats: [
-    { label: 'Igrejas atendidas', value: '500+' },
-    { label: 'Em repasses processados', value: 'R$ 2M+' },
-    { label: 'Suporte', value: '24/7' },
+    { label: 'Secretaria', value: 'Organizada' },
+    { label: 'Tesouraria', value: 'Em dia' },
+    { label: 'Relatórios', value: 'Guiados' },
   ],
   features: [
     {

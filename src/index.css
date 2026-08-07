@@ -4,25 +4,25 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    --background: 42 38% 97%;
+    --foreground: 231 41% 12%;
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 231 41% 12%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 37 55% 42%;
+    --popover-foreground: 231 41% 12%;
+    --primary: 188 74% 35%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    --secondary: 32 64% 92%;
+    --secondary-foreground: 231 41% 12%;
+    --muted: 210 28% 94%;
+    --muted-foreground: 223 15% 41%;
+    --accent: 181 43% 91%;
+    --accent-foreground: 231 41% 12%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 37 55% 42%;
+    --border: 226 26% 88%;
+    --input: 226 26% 88%;
+    --ring: 188 74% 35%;
     --radius: 0.5rem;
   }
 
@@ -55,6 +55,7 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
+    text-rendering: optimizeLegibility;
   }
   h1,
   h2,
@@ -65,7 +66,7 @@
 
 @layer components {
   .pill-badge {
-    @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide;
+    @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold uppercase;
   }
 
   .ledger-figure {
@@ -74,7 +75,19 @@
 
   .ink-glow {
     background-image:
-      radial-gradient(ellipse 55% 45% at 15% 15%, rgba(185, 138, 62, 0.12), transparent 65%),
-      radial-gradient(ellipse 45% 40% at 90% 60%, rgba(255, 255, 255, 0.05), transparent 70%);
+      linear-gradient(135deg, rgba(18, 22, 43, 0.98), rgba(20, 34, 54, 0.98)),
+      radial-gradient(ellipse 55% 45% at 15% 15%, rgba(45, 212, 191, 0.18), transparent 65%),
+      radial-gradient(ellipse 45% 40% at 90% 60%, rgba(214, 173, 107, 0.12), transparent 70%);
+  }
+
+  .section-shell {
+    @apply mx-auto max-w-6xl px-4;
+  }
+
+  .surface-grid {
+    background-image:
+      linear-gradient(rgba(18, 22, 43, 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(18, 22, 43, 0.055) 1px, transparent 1px);
+    background-size: 42px 42px;
   }
 }

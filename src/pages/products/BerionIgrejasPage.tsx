@@ -1,10 +1,11 @@
-import {
+﻿import {
   ArrowRight,
   BarChart3,
   CheckCircle2,
   Church,
   CreditCard,
   FileText,
+  HeartHandshake,
   KeyRound,
   LayoutDashboard,
   Lock,
@@ -26,13 +27,19 @@ import { whatsappLink } from '@/lib/whatsapp'
 const hex = accentHex[berionIgrejas.accentColor]
 const cta = whatsappLink(`Olá! Quero saber mais sobre o ${berionIgrejas.name}.`)
 
+const VALUE_PROPS = [
+  { icon: Users, label: 'Cadastro de membros' },
+  { icon: Wallet, label: 'Tesouraria organizada' },
+  { icon: FileText, label: 'Relatórios mensais' },
+]
+
 export function BerionIgrejasPage() {
   return (
     <div>
-      <section className="ink-glow bg-ink px-4 py-20 text-paper">
-        <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
+      <section className="bg-[#141527] px-4 py-20 text-paper">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-[0.86fr_1.14fr]">
           <div>
-            <span className="pill-badge" style={{ borderColor: `${hex[400]}66`, color: hex[400] }}>
+            <span className="pill-badge bg-white/5" style={{ borderColor: `${hex[400]}66`, color: hex[400] }}>
               <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: hex[400] }} />
               {berionIgrejas.tag}
             </span>
@@ -62,11 +69,20 @@ export function BerionIgrejasPage() {
               </Button>
             </div>
 
+            <div className="mt-10 flex flex-wrap gap-6">
+              {VALUE_PROPS.map(({ icon: Icon, label }) => (
+                <div key={label} className="flex items-center gap-2 text-sm text-paper/60">
+                  <Icon className="h-4 w-4" style={{ color: hex[400] }} />
+                  {label}
+                </div>
+              ))}
+            </div>
+
             {berionIgrejas.stats && (
-              <div className="mt-10 flex flex-wrap gap-8">
+              <div className="mt-8 grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-3">
                 {berionIgrejas.stats.map((stat) => (
-                  <div key={stat.label}>
-                    <p className="ledger-figure text-xl font-semibold">{stat.value}</p>
+                  <div key={stat.label} className="rounded-lg border border-white/10 bg-white/[0.035] p-3">
+                    <p className="ledger-figure text-lg font-semibold">{stat.value}</p>
                     <p className="mt-0.5 text-xs text-paper/50">{stat.label}</p>
                   </div>
                 ))}
@@ -77,8 +93,8 @@ export function BerionIgrejasPage() {
           <DashboardMockup
             title={berionIgrejas.name}
             accent={hex[400]}
-            sidebarItems={['Visão geral', 'Membros', 'Contribuições', 'Repasses', 'Relatórios']}
-            sidebarIcons={[LayoutDashboard, Users, Wallet, BarChart3, FileText]}
+            sidebarItems={['Home', 'Secretaria', 'Tesouraria', 'Dashboard', 'Suporte']}
+            sidebarIcons={[LayoutDashboard, Users, Wallet, BarChart3, HeartHandshake]}
             tiles={
               berionIgrejas.stats?.map((s) => ({ label: s.label, value: s.value })) ?? [
                 { label: 'Membros', value: 'Ativo' },
@@ -87,19 +103,22 @@ export function BerionIgrejasPage() {
               ]
             }
             barItems={berionIgrejas.features.slice(0, 4).map((f) => f.title)}
+            imageSrc="/mockups/berion-igrejas-dashboard.png"
+            className="lg:-mr-6"
           />
         </div>
       </section>
 
       <FeatureGrid
         eyebrow="Funcionalidades"
-        heading="Tudo o que sua igreja precisa, em uma plataforma completa"
-        subheading="Soluções integradas para tornar a gestão da sua igreja mais simples, segura e eficiente."
+        heading="A rotina administrativa da igreja em um painel só"
+        subheading="Secretaria, tesouraria, relatórios, cadastro de membros e ações rápidas para reduzir retrabalho no dia a dia."
         accentText={hex[600]}
         features={berionIgrejas.features}
         icons={[Wallet, ShieldCheck, BarChart3, Users, KeyRound, CreditCard]}
         iconBg={`${hex[500]}1A`}
         iconColor={hex[600]}
+        withGrid={false}
       />
 
       <TrustSection

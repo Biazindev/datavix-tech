@@ -1,4 +1,4 @@
-import {
+﻿import {
   Bell,
   BookOpen,
   Calendar,
@@ -72,7 +72,7 @@ export function AppMembrosPage() {
             </div>
           </div>
 
-          <div className="relative flex justify-center py-6">
+          <div className="relative flex items-start justify-center py-6">
             <PhoneMockup
               accent={hex[400]}
               title="Feed da comunidade"
@@ -80,7 +80,8 @@ export function AppMembrosPage() {
               cardBody="Culto de celebração — domingo, às 18h30, no templo sede."
               ctaLabel="Ver detalhes"
               tabIcons={[Home, Calendar, BookOpen, Bell]}
-              className="-mr-10 rotate-[-6deg]"
+              imageSrc="/mockups/app-membros-feed.jpg"
+              className="-mr-8"
             />
             <PhoneMockup
               accent={hex[400]}
@@ -89,7 +90,8 @@ export function AppMembrosPage() {
               cardBody="Acompanhe a transmissão da sua igreja direto do app, sem sair do WiFi de casa."
               ctaLabel="Assistir"
               tabIcons={[Radio, Users, MessageCircle, CreditCard]}
-              className="mt-10 rotate-[4deg]"
+              imageSrc="/mockups/app-membros-live.jpg"
+              className="mt-8"
             />
           </div>
         </div>

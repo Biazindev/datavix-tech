@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-label="Placeholder do dashboard Berion Igrejas">
+  <rect width="960" height="600" fill="#171b33"/>
+  <rect x="28" y="28" width="904" height="544" rx="22" fill="#1f2340" stroke="#ffffff" stroke-opacity=".12"/>
+  <text x="64" y="82" fill="#a78bfa" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Berion Igrejas</text>
+  <text x="64" y="126" fill="#fff8e7" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700">Imagem do dashboard aqui</text>
+  <text x="64" y="164" fill="#c8c3d8" font-family="Inter, Arial, sans-serif" font-size="18">Substitua este arquivo por um print real do painel.</text>
+  <rect x="64" y="230" width="236" height="112" rx="16" fill="#2a2f52"/>
+  <rect x="336" y="230" width="236" height="112" rx="16" fill="#2a2f52"/>
+  <rect x="608" y="230" width="236" height="112" rx="16" fill="#2a2f52"/>
+  <rect x="64" y="390" width="780" height="22" rx="11" fill="#312f57"/>
+  <rect x="64" y="390" width="560" height="22" rx="11" fill="#a78bfa"/>
+  <rect x="64" y="442" width="780" height="22" rx="11" fill="#312f57"/>
+  <rect x="64" y="442" width="650" height="22" rx="11" fill="#a78bfa"/>
+  <text x="64" y="532" fill="#a78bfa" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">/public/mockups/berion-igrejas-dashboard.svg</text>
+</svg>

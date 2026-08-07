@@ -1,39 +1,39 @@
-import { productAccent } from '../theme'
+﻿import { productAccent } from '../theme'
 import type { ProductContent } from './types'
 
 export const berionComercios: ProductContent = {
   slug: 'berion-comercios',
   name: 'Berion Comércios',
-  tag: 'ERP comércio & serviços',
-  tagline: 'ERP completo para comércio e serviços',
+  tag: 'ERP modular para comércio e serviços',
+  tagline: 'O ERP que se adapta ao seu negócio, não o contrário',
   description:
-    'Gestão de vendas, estoque, financeiro e múltiplas filiais em uma plataforma só, para comércios e prestadores de serviço.',
+    'Venda, estoque, financeiro, documentos fiscais, delivery, comandas, orçamento e ordem de serviço em uma plataforma modular para pequenos e médios negócios no Brasil.',
   accentColor: productAccent['berion-comercios'],
-  ctaLabel: 'Conhecer o ERP',
+  ctaLabel: 'Conhecer o Berion',
   features: [
     {
-      title: 'PDV e vendas',
-      description: 'Frente de caixa completa para registrar vendas rapidamente.',
+      title: 'PDV por atacado e varejo',
+      description: 'Venda de balcão com busca de produto, múltiplas formas de pagamento e preço automático por perfil.',
     },
     {
-      title: 'Comandas e delivery',
-      description: 'Controle de comandas e pedidos de delivery integrados ao mesmo sistema.',
+      title: 'Módulos por segmento',
+      description: 'Padaria, mercado, depósito, construção, restaurante e pizzaria carregam apenas o que faz sentido.',
     },
     {
-      title: 'Estoque e financeiro',
-      description: 'Controle de estoque em tempo real e visão financeira do negócio.',
+      title: 'Estoque por filial',
+      description: 'Controle de entrada e saída por unidade, com rastreio para reduzir perda e sumiço de produto.',
     },
     {
-      title: 'Multi-filiais',
-      description: 'Gerencie várias filiais a partir de um único painel.',
+      title: 'Cloud ou servidor local',
+      description: 'Rode hospedado por nós ou instalado na máquina do cliente quando a operação exigir dados locais.',
     },
     {
-      title: 'Orçamentos e ordens de serviço',
-      description: 'Monte orçamentos e acompanhe ordens de serviço do início ao fim.',
+      title: 'Documentos fiscais e financeiro',
+      description: 'Documentos fiscais, contas a pagar e receber no mesmo fluxo operacional.',
     },
     {
-      title: 'Clientes e usuários',
-      description: 'Cadastro de clientes e controle de acesso por usuário.',
+      title: 'Usuários e integrações',
+      description: 'Perfis de acesso por usuário e estrutura pronta para marketplaces como Mercado Livre, Shopee e Amazon.',
     },
   ],
 }

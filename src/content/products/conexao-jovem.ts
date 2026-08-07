@@ -1,4 +1,4 @@
-import { productAccent } from '../theme'
+﻿import { productAccent } from '../theme'
 import type { ProductContent } from './types'
 
 export const conexaoJovem: ProductContent = {
