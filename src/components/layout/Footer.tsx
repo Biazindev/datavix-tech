@@ -4,6 +4,7 @@ import { products } from '@/content/products'
 import { Button } from '@/components/ui/button'
 import { whatsappLink } from '@/lib/whatsapp'
 
+//test
 export function Footer() {
   return (
     <footer className="bg-ink text-paper">
@@ -12,8 +13,8 @@ export function Footer() {
           <p className="flex items-center gap-2 font-display text-lg font-bold">
             <img
               src="/brand/datavix-logo.png"
-              alt="DataVix Tech"
-              className="h-12 w-auto"
+              alt="DataVixTech"
+              className="h-10 w-auto"
             />
           </p>
           <p className="mt-4 max-w-sm text-sm leading-6 text-paper/62">
