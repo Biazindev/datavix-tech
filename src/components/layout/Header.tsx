@@ -11,7 +11,6 @@ import { Button } from '@/components/ui/button'
 import { products } from '@/content/products'
 import { whatsappLink } from '@/lib/whatsapp'
 
-//teste
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
