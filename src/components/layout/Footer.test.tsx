@@ -3,6 +3,8 @@ import { describe, it, expect } from 'vitest'
 import { MemoryRouter } from 'react-router-dom'
 import { Footer } from './Footer'
 
+//teste
+
 describe('Footer', () => {
   it('shows both phone numbers, with only the primary as a WhatsApp link', () => {
     render(
