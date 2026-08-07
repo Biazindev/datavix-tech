@@ -10,12 +10,17 @@
   Home,
   LogIn,
   Lock,
+  Medal,
   MessageCircle,
   PlayCircle,
   Server,
   ShieldCheck,
   Sparkles,
+  Trophy,
+  Users,
+  Zap,
 } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
 import { Button } from '@/components/ui/button'
 import { PhoneMockup } from '@/components/mockups/PhoneMockup'
@@ -41,8 +46,53 @@ const VALUE_PROPS = [
   { icon: ShieldCheck, label: 'Login seguro com Google' },
 ]
 
+const CHALLENGES = [
+  { title: 'Convide um amigo para o culto', type: 'Ação', points: '+200pt', done: false },
+  { title: 'Perguntas Bíblicas', type: 'Quiz', points: '+150pt', done: true },
+  { title: 'Compartilhe o app com a galera', type: 'Ação', points: '+550pt', done: false },
+]
+
+const LIVE_RANKING_ROUNDS = [
+  [
+    { name: 'Lucas', points: 2840 },
+    { name: 'Ana', points: 2825 },
+    { name: 'Pedro', points: 2790 },
+  ],
+  [
+    { name: 'Ana', points: 3010 },
+    { name: 'Lucas', points: 2960 },
+    { name: 'Pedro', points: 2895 },
+  ],
+  [
+    { name: 'Pedro', points: 3190 },
+    { name: 'Ana', points: 3125 },
+    { name: 'Lucas', points: 3070 },
+  ],
+  [
+    { name: 'Lucas', points: 3380 },
+    { name: 'Pedro', points: 3345 },
+    { name: 'Ana', points: 3290 },
+  ],
+]
+
 export function ConexaoJovemPage() {
   const shouldReduceMotion = useReducedMotion()
+  const [rankingRound, setRankingRound] = useState(0)
+
+  useEffect(() => {
+    if (shouldReduceMotion) return undefined
+
+    const interval = window.setInterval(() => {
+      setRankingRound((current) => {
+        const next = Math.floor(Math.random() * LIVE_RANKING_ROUNDS.length)
+        return next === current ? (current + 1) % LIVE_RANKING_ROUNDS.length : next
+      })
+    }, 2600)
+
+    return () => window.clearInterval(interval)
+  }, [shouldReduceMotion])
+
+  const liveRanking = LIVE_RANKING_ROUNDS[rankingRound]
 
   return (
     <div>
@@ -221,6 +271,171 @@ export function ConexaoJovemPage() {
         cardClassName="border-[#6bff1f]/15 bg-white/[0.035] text-paper shadow-none hover:border-[#6bff1f]/35 hover:shadow-[#6bff1f]/10"
         descriptionClassName="text-paper/58"
       />
+
+      <section id="desafios" className="overflow-hidden bg-[#000602] px-4 py-20 text-paper">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
+          <motion.div>
+            <span
+              className="pill-badge bg-black/25 shadow-lg shadow-[#6bff1f]/10"
+              style={{ borderColor: `${hex[400]}55`, color: hex[400] }}
+            >
+              <Trophy className="h-3.5 w-3.5" />
+              Desafios com premiação
+            </span>
+            <h2 className="mt-5 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
+              Transforme participação em pontos, ranking e prêmio final.
+            </h2>
+            <p className="mt-4 max-w-xl text-base leading-7 text-paper/62">
+              A liderança cria desafios semanais, quizzes bíblicos e ações práticas. Cada jovem soma pontos,
+              sobe no ranking e os melhores colocados podem receber uma premiação no encerramento da campanha.
+            </p>
+
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+              {[
+                { icon: Zap, label: 'Missões semanais' },
+                { icon: Medal, label: 'Ranking por pontos' },
+                { icon: Trophy, label: 'Prêmio para os melhores' },
+              ].map(({ icon: Icon, label }) => (
+                <motion.div
+                  key={label}
+                  className="rounded-md border border-[#6bff1f]/15 bg-white/[0.035] p-4"
+                  whileHover={shouldReduceMotion ? undefined : { y: -4, borderColor: 'rgba(107,255,31,0.42)' }}
+                >
+                  <Icon className="h-5 w-5 text-[#83ff38]" />
+                  <p className="mt-3 text-sm font-semibold text-paper">{label}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="relative"
+            animate={shouldReduceMotion ? undefined : { y: [0, -8, 0] }}
+            transition={shouldReduceMotion ? undefined : { duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <motion.div
+              aria-hidden="true"
+              className="absolute -right-10 -top-10 h-44 w-44 rounded-full bg-[#6bff1f]/15 blur-3xl"
+              animate={shouldReduceMotion ? undefined : { scale: [1, 1.18, 1], opacity: [0.55, 0.95, 0.55] }}
+              transition={shouldReduceMotion ? undefined : { duration: 3.4, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <div className="relative overflow-hidden rounded-[28px] border border-[#6bff1f]/20 bg-gradient-to-br from-[#061407] via-[#020803] to-black p-5 shadow-2xl shadow-[#6bff1f]/10">
+              {!shouldReduceMotion && (
+                <motion.span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#6bff1f]/10 to-transparent"
+                  animate={{ y: ['-120%', '720%'], opacity: [0, 0.75, 0] }}
+                  transition={{ duration: 4.8, repeat: Infinity, repeatDelay: 1.2, ease: 'easeInOut' }}
+                />
+              )}
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#6bff1f]/15 pb-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#83ff38]">Semana ativa</p>
+                  <h3 className="mt-1 text-2xl font-bold">Desafios da Semana</h3>
+                </div>
+                <motion.span
+                  className="rounded-full bg-[#6bff1f] px-3 py-1 text-xs font-bold text-ink"
+                  animate={shouldReduceMotion ? undefined : { scale: [1, 1.06, 1], boxShadow: ['0 0 0 rgba(107,255,31,0)', '0 0 22px rgba(107,255,31,0.38)', '0 0 0 rgba(107,255,31,0)'] }}
+                  transition={shouldReduceMotion ? undefined : { duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  Ranking ao vivo
+                </motion.span>
+              </div>
+
+              <div className="mt-5 grid gap-3">
+                {CHALLENGES.map((challenge, index) => (
+                  <motion.div
+                    key={challenge.title}
+                    className={`flex items-center gap-4 rounded-2xl border p-4 ${
+                      challenge.done
+                        ? 'border-[#6bff1f]/45 bg-[#6bff1f]/10'
+                        : 'border-[#6bff1f]/14 bg-black/28'
+                    }`}
+                    animate={
+                      shouldReduceMotion
+                        ? undefined
+                        : challenge.done
+                          ? {
+                              scale: [1, 1.015, 1],
+                              boxShadow: ['0 0 0 rgba(107,255,31,0)', '0 0 28px rgba(107,255,31,0.16)', '0 0 0 rgba(107,255,31,0)'],
+                            }
+                          : { x: [0, 3, 0] }
+                    }
+                    transition={{ duration: challenge.done ? 2.8 : 4.2, repeat: Infinity, delay: index * 0.35, ease: 'easeInOut' }}
+                  >
+                    <span
+                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${
+                        challenge.done ? 'bg-[#6bff1f] text-ink' : 'bg-[#ff6565]/15 text-[#ff7676]'
+                      }`}
+                    >
+                      {challenge.done ? <CheckCircle2 className="h-5 w-5" /> : <Zap className="h-5 w-5" />}
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-bold text-paper sm:text-base">{challenge.title}</p>
+                      <p className="text-xs text-paper/48">
+                        {challenge.type} · jovens pontuando agora
+                      </p>
+                    </div>
+                    <motion.strong
+                      className="text-sm text-[#ffe36d] sm:text-base"
+                      animate={shouldReduceMotion ? undefined : { scale: [1, 1.16, 1], color: ['#ffe36d', '#ffffff', '#ffe36d'] }}
+                      transition={shouldReduceMotion ? undefined : { duration: 1.8, repeat: Infinity, delay: index * 0.45, ease: 'easeInOut' }}
+                    >
+                      {challenge.points}
+                    </motion.strong>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                <div className="mb-3 flex items-center justify-between">
+                  <p className="flex items-center gap-2 text-sm font-bold">
+                    <Users className="h-4 w-4 text-[#83ff38]" />
+                    Top ranking
+                  </p>
+                  <p className="text-xs font-semibold text-paper/42">campanha atual</p>
+                </div>
+                <div className="space-y-2">
+                  {liveRanking.map((member, index) => (
+                    <motion.div
+                      key={member.name}
+                      layout
+                      className="flex items-center justify-between rounded-xl bg-black/22 px-3 py-2"
+                      animate={shouldReduceMotion ? undefined : { x: [0, index === 0 ? 6 : 2, 0], backgroundColor: ['rgba(0,0,0,0.22)', 'rgba(107,255,31,0.08)', 'rgba(0,0,0,0.22)'] }}
+                      transition={{
+                        layout: { duration: 0.5, type: 'spring', bounce: 0.22 },
+                        ...(shouldReduceMotion
+                          ? {}
+                          : { duration: 3.2, repeat: Infinity, delay: index * 0.45 + 0.6, ease: 'easeInOut' }),
+                      }}
+                    >
+                      <span className="flex items-center gap-2 text-sm font-semibold">
+                        <motion.span
+                          className="flex h-6 w-6 items-center justify-center rounded-full bg-[#6bff1f]/15 text-xs text-[#83ff38]"
+                          animate={shouldReduceMotion ? undefined : { scale: [1, 1.18, 1] }}
+                          transition={shouldReduceMotion ? undefined : { duration: 2.4, repeat: Infinity, delay: index * 0.35, ease: 'easeInOut' }}
+                        >
+                          {index + 1}
+                        </motion.span>
+                        {member.name}
+                      </span>
+                      <motion.span
+                        key={`${member.name}-${member.points}`}
+                        className="text-xs font-bold text-paper/70"
+                        initial={shouldReduceMotion ? false : { scale: 0.92, color: '#83ff38' }}
+                        animate={shouldReduceMotion ? undefined : { scale: 1, color: 'rgba(250,248,243,0.7)' }}
+                        transition={shouldReduceMotion ? undefined : { duration: 0.35 }}
+                      >
+                        {member.points.toLocaleString('pt-BR')} pts
+                      </motion.span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
       <TrustSection
         heading="Tecnologia segura para a sua comunidade crescer."

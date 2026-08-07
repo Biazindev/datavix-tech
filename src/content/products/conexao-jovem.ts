@@ -24,6 +24,10 @@ export const conexaoJovem: ProductContent = {
       description: 'Espaço para os jovens interagirem e acompanharem a vida do departamento.',
     },
     {
+      title: 'Desafios semanais com ranking',
+      description: 'Missões, quizzes e ações valem pontos para um ranking que premia os melhores no final.',
+    },
+    {
       title: 'Login com Google',
       description: 'Entrada rápida e segura usando a conta Google do jovem.',
     },

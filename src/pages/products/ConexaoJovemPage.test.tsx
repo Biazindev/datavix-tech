@@ -15,6 +15,9 @@ describe('ConexaoJovemPage', () => {
     conexaoJovem.features.forEach((feature) => {
       expect(screen.getAllByText(feature.title).length).toBeGreaterThan(0)
     })
+    expect(screen.getByRole('heading', { name: /Desafios da Semana/i })).toBeInTheDocument()
+    expect(screen.getByText(/Ranking por pontos/i)).toBeInTheDocument()
+    expect(screen.getByText(/Prêmio para os melhores/i)).toBeInTheDocument()
     const ctas = screen.getAllByRole('link', { name: new RegExp(conexaoJovem.ctaLabel, 'i') })
     expect(ctas.length).toBeGreaterThan(0)
     ctas.forEach((cta) => expect(cta).toHaveAttribute('href', expect.stringContaining('wa.me/5544991179564')))

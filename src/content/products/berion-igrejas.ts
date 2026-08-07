@@ -17,31 +17,49 @@ export const berionIgrejas: ProductContent = {
   ],
   features: [
     {
-      title: 'Split automático de repasses',
+      title: 'Gestão de membros',
       description:
-        'Divisão automática de dízimos e ofertas entre sede mundial, regional, fundos e pastor, com percentuais configuráveis por igreja.',
+        'Cadastro completo de membros, aniversariantes, dados ministeriais e informações importantes da secretaria em um só lugar.',
     },
     {
-      title: 'Relatórios com dupla aprovação',
+      title: 'Carteirinhas e certificados',
       description:
-        'Fluxo guiado em que pastor e tesoureiro aprovam, e o sistema envia o relatório financeiro automaticamente para a sede.',
+        'Impressão de carteirinhas no padrão da sua igreja e certificados prontos com um clique.',
     },
     {
-      title: 'Dashboard multi-igrejas',
+      title: 'Relatórios ajustados à política da igreja',
       description:
-        'Visão em tempo real para sedes e redes acompanharem indicadores financeiros e de crescimento de todas as igrejas.',
+        'Envio de relatórios configurado conforme a política da igreja, com fluxo guiado para secretaria, tesouraria e liderança.',
     },
     {
-      title: 'Gestão completa de membros',
-      description: 'Cadastro, aniversariantes, certificados e carteirinhas em um só lugar.',
+      title: 'Painel inteligente da sede',
+      description:
+        'Acompanhamento igreja por igreja, 100% online e em tempo real, para sedes e redes acompanharem a operação.',
     },
     {
-      title: 'RBAC granular',
-      description: 'Perfis de acesso para Pastor, Tesoureiro, Secretaria e Admin.',
+      title: 'Entradas e saídas diárias',
+      description:
+        'Cadastro diário de entradas e saídas para manter a tesouraria organizada e reduzir retrabalho no fechamento.',
     },
     {
-      title: 'PIX e boleto',
-      description: 'Integração com gateway de pagamentos para repasses e contribuições.',
+      title: 'Cartas e convites padronizados',
+      description:
+        'Modelos de cartas, convites e documentos administrativos no padrão da sua igreja, prontos para gerar e imprimir.',
+    },
+    {
+      title: 'Gestão de igrejas e pastores',
+      description:
+        'Controle administrativo de igrejas, pastores, vínculos pastor/igreja e informações históricas da liderança.',
+    },
+    {
+      title: 'Logs e históricos completos',
+      description:
+        'Registro de tudo que acontece no sistema, com histórico da igreja, histórico do pastor e histórico pastor/igreja.',
+    },
+    {
+      title: 'Dashboard administrativo completo',
+      description:
+        'Indicadores claros para acompanhar secretaria, tesouraria, relatórios, membros e gestão administrativa da igreja.',
     },
   ],
 }

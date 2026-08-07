@@ -1,6 +1,7 @@
 ﻿import {
   ArrowRight,
   BarChart3,
+  BookOpenText,
   CheckCircle2,
   Church,
   CreditCard,
@@ -10,8 +11,11 @@
   LayoutDashboard,
   Lock,
   PlayCircle,
+  Printer,
+  ScrollText,
   Server,
   ShieldCheck,
+  UserCheck,
   Users,
   Wallet,
 } from 'lucide-react'
@@ -31,6 +35,19 @@ const VALUE_PROPS = [
   { icon: Users, label: 'Cadastro de membros' },
   { icon: Wallet, label: 'Tesouraria organizada' },
   { icon: FileText, label: 'Relatórios mensais' },
+]
+
+const ADMIN_MODULES = [
+  'Secretaria',
+  'Gestão completa de membros',
+  'Gestão de igrejas',
+  'Gestão de pastores',
+  'Histórico da igreja',
+  'Histórico do pastor',
+  'Histórico pastor/igreja',
+  'Log de tudo que acontece no sistema',
+  'Dashboard completo',
+  'Gestão completa administrativa',
 ]
 
 export function BerionIgrejasPage() {
@@ -111,15 +128,41 @@ export function BerionIgrejasPage() {
 
       <FeatureGrid
         eyebrow="Funcionalidades"
-        heading="A rotina administrativa da igreja em um painel só"
-        subheading="Secretaria, tesouraria, relatórios, cadastro de membros e ações rápidas para reduzir retrabalho no dia a dia."
+        heading="Muito além do cadastro: secretaria, sede, históricos e documentos"
+        subheading="Do membro ao painel da sede, o Berion Igrejas organiza a rotina administrativa, documental e financeira da igreja."
         accentText={hex[600]}
         features={berionIgrejas.features}
-        icons={[Wallet, ShieldCheck, BarChart3, Users, KeyRound, CreditCard]}
+        icons={[Users, Printer, FileText, LayoutDashboard, Wallet, ScrollText, UserCheck, BookOpenText, BarChart3]}
         iconBg={`${hex[500]}1A`}
         iconColor={hex[600]}
         withGrid={false}
       />
+
+      <section className="bg-white px-4 pb-16">
+        <div className="section-shell">
+          <div className="rounded-lg border border-border bg-card p-6 shadow-sm">
+            <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+              <div>
+                <span className="pill-badge" style={{ borderColor: `${hex[400]}55`, color: hex[600] }}>
+                  Gestão administrativa
+                </span>
+                <h2 className="mt-4 text-2xl font-bold">Tudo registrado, organizado e pronto para acompanhar</h2>
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                  A sede acompanha a operação em tempo real, e a igreja mantém documentos, históricos e logs com clareza.
+                </p>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {ADMIN_MODULES.map((module) => (
+                  <div key={module} className="flex items-center gap-2 rounded-lg border border-border bg-background px-3 py-2 text-sm font-medium">
+                    <CheckCircle2 className="size-4 shrink-0" style={{ color: hex[600] }} />
+                    {module}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <TrustSection
         heading="Tecnologia segura. Missão protegida. Resultados que contam."

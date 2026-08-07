@@ -4,17 +4,16 @@ import { products } from '@/content/products'
 import { Button } from '@/components/ui/button'
 import { whatsappLink } from '@/lib/whatsapp'
 
-//test
 export function Footer() {
   return (
     <footer className="bg-ink text-paper">
       <div className="section-shell grid gap-10 py-14 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr]">
         <div>
-          <p className="flex items-center gap-2 font-display text-lg font-bold">
+          <p className="flex items-center font-display text-lg font-bold">
             <img
-              src="/brand/datavix-logo.png"
-              alt="DataVixTech"
-              className="h-10 w-auto"
+              src="/brand/datavix-logo-header.png"
+              alt="DataVix"
+              className="h-12 w-auto"
             />
           </p>
           <p className="mt-4 max-w-sm text-sm leading-6 text-paper/62">

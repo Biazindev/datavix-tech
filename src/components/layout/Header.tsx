@@ -1,4 +1,4 @@
-import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useState } from 'react'
+import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { ArrowUpRight, ChevronDown, Menu, MessageCircle, X } from 'lucide-react'
 import {
@@ -25,9 +25,9 @@ export function Header() {
       <div className="section-shell flex items-center justify-between py-3">
         <Link to="/" className="flex items-center font-display text-lg font-semibold tracking-tight">
           <img
-            src="/brand/datavix-logo.png"
-            alt="DataVixTech"
-            className="h-30 w-auto"
+            src="/brand/datavix-logo-header.png"
+            alt="DataVix"
+            className="h-10 w-auto"
           />
         </Link>
 
@@ -40,7 +40,7 @@ export function Header() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
-              {products.map((product: { slug: any; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined }) => (
+              {products.map((product) => (
                 <DropdownMenuItem key={product.slug} asChild>
                   <Link to={`/${product.slug}`}>{product.name}</Link>
                 </DropdownMenuItem>
@@ -87,7 +87,7 @@ export function Header() {
           <div className="mx-auto flex max-w-6xl flex-col gap-4">
             <span className="text-xs font-semibold uppercase text-paper/45">Produtos</span>
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-              {products.map((product: { slug: Key | null | undefined; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined }) => (
+              {products.map((product) => (
                 <Link
                   key={product.slug}
                   to={`/${product.slug}`}
