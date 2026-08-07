@@ -32,3 +32,5 @@ yarn-error.log*
 
 # superpowers subagent-driven-development scratch workspace
 .superpowers/
+
+.vercel
